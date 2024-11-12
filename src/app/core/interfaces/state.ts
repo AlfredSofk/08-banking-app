@@ -2,28 +2,32 @@ import { IAuthState } from "./auth";
 import { IAppState } from "./bankAccount";
 
 export interface IContextApp {
-    state : IStateAppContext
-    dispatch : React.Dispatch<IActionApp>
+    state: IStateAppContext
+    dispatch: React.Dispatch<IActionApp>
 }
 
-export interface IStateAppContext extends IAppState {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IStateAppContext extends IAppState { }
 
 export interface IActionApp {
-    type : string;
-    payload : any;
+    type: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    payload: any;
 }
 
 
 
 
 export interface IContextAuth {
-    state : IStateAuthContext
-    dispatch : React.Dispatch<IActionAuth>
+    state: IStateAuthContext
+    dispatch: React.Dispatch<IActionAuth>
 }
 
-export interface IStateAuthContext extends IAuthState {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IStateAuthContext extends IAuthState { }
 
 export interface IActionAuth {
-    type : string;
-    payload : any;
+    type: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    payload: any;
 }
