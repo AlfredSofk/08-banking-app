@@ -1,8 +1,7 @@
 
 interface IAuthUser {
-    id: string; 
+    id: string;
     name: string;
-    role: string 
 }
 
 export interface IAuthState {

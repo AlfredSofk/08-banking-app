@@ -21,6 +21,10 @@ export const router = createHashRouter([
         ),
         children: [
             {
+                path: "home",
+                element: <h1>Home</h1>,
+            },
+            {
                 path: "dashboard",
                 element: <Dashboard />,
             },
