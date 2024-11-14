@@ -1,5 +1,5 @@
 import { IAuthState } from "../../interfaces/auth"
-import { IBodyLoginToken } from "../../interfaces/requestToApi";
+import { ILoginToken } from "../../interfaces/requestApiTo";
 import { loginActionTypes } from "./action";
 
 
@@ -13,12 +13,15 @@ export const initialAuthState: IAuthState = {
 
 export const loginCases = {
 
-    [loginActionTypes.LOGIN]: (state: IAuthState, payload?: IBodyLoginToken) => {
+    [loginActionTypes.LOGIN]: (state: IAuthState, payload?: ILoginToken) => {
 
         console.log(payload)
 
         return {
-            ...state
+            ...state,
+            isAuthenticated: true,
+            token: payload?.dinBody.token,
+            loading: false,
         }
     },
     [loginActionTypes.LOGOUT]: (state: IAuthState) => {
@@ -28,8 +31,11 @@ export const loginCases = {
     },
     [loginActionTypes.LOADING]: (state: IAuthState) => {
         return {
-            ...state
-
+            ...state,
+            loading: true
         }
     },
+    [loginActionTypes.ERROR]: (state: IAuthState, payload: string) => {
+        return { ...state, error: payload }
+    }
 }

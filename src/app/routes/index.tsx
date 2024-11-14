@@ -29,14 +29,18 @@ export const router = createHashRouter([
                 element: <Dashboard />,
             },
             {
-                path: "/deposit",
+                path: "deposit",
                 element: <Deposit />,
             },
         ],
     },
     {
         path: "/login",
-        element: <Login />
+        element: (
+            <AuthProvider>
+                <Login />
+            </AuthProvider>
+        )
     },
     { path: "*", element: <h1>404</h1> },
 ]);
