@@ -2,7 +2,6 @@ import { IDinError, IDinHeader } from "./requestToApi";
 
 interface dinBodyLoginToken {
     token: string
-
 }
 
 interface BankTransactionDepositSucursal {
@@ -19,4 +18,9 @@ export interface ILoginToken {
 export interface ITransactionDeposit {
     dinHeader: IDinHeader;
     dinBody: BankTransactionDepositSucursal;
+}
+
+export IResBankTransactionWithDrawFromATM {
+    dinHeader : IDinHeader;
+    dinError : IDinError
 }

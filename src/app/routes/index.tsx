@@ -3,26 +3,26 @@ import { AuthProvider } from "../core/state/authContext/AuthContext";
 import { AppProvider } from '../core/state/appContext/AppContext';
 import { SessionGuard } from './guards/GuardSession';
 import AppContainer from "../container/AppContainer";
-import Login from "../ui/components/Login";
 import Deposit from "../ui/components/Deposit";
 import Dashboard from "../ui/components/Dashboard";
+import LoginContainer from "../container/LoginContainer";
 
 export const router = createHashRouter([
     {
-        path: "/",
+        path: "/home",
         element: (
             <AuthProvider>
-                <AppProvider>
-                    <SessionGuard>
+                <SessionGuard>
+                    <AppProvider>
                         <AppContainer />
-                    </SessionGuard>
-                </AppProvider>
+                    </AppProvider>
+                </SessionGuard>
             </AuthProvider>
         ),
         children: [
             {
-                path: "home",
-                element: <h1>Home</h1>,
+                path: "windraw",
+                element: <h1>Windraw</h1>,
             },
             {
                 path: "dashboard",
@@ -35,10 +35,10 @@ export const router = createHashRouter([
         ],
     },
     {
-        path: "/login",
+        path: "/",
         element: (
             <AuthProvider>
-                <Login />
+                <LoginContainer />
             </AuthProvider>
         )
     },

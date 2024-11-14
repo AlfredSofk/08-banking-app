@@ -1,5 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 import { Navigate } from "react-router-dom";
+import { AuthContext } from "../../core/state/authContext/AuthContext";
 
 
 interface IGuardProps {
@@ -9,14 +10,15 @@ interface IGuardProps {
 
 export const SessionGuard = ({ children }: IGuardProps) => {
 
-    // const { state } = useContext(AuthContext);
+//   const {state} = useContext(AuthContext);
 
-    const { currentUser } = { currentUser: true }
+const {currentUser} = {currentUser : true}
+
+//   state.isAuthenticated
 
     if (!currentUser) {
-        return <Navigate to="/login" replace />
+        return <Navigate to="/" replace />
 
     }
-
     return children;
 };

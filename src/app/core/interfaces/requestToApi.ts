@@ -1,3 +1,4 @@
+import { IBankTransactionWithDrawFromATM } from "./transaction";
 
 export interface IDinHeader {
     dispositivo: string;
@@ -33,4 +34,10 @@ export interface IDinBodyLoginToken {
 export interface IRequestMs {
     dinHeader: IDinHeader;
     dinError: IDinError;
+}
+
+export interface ITransactionWithDrawFromATM {
+    dinHeader : IDinHeader
+    dinBody : IBankTransactionWithDrawFromATM
+
 }

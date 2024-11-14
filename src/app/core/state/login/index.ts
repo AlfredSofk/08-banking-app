@@ -1,5 +1,6 @@
 import { IAuthState } from "../../interfaces/auth"
 import { ILoginToken } from "../../interfaces/requestApiTo";
+import { parseJwt } from "../../utils/JWT";
 import { loginActionTypes } from "./action";
 
 
@@ -15,11 +16,14 @@ export const loginCases = {
 
     [loginActionTypes.LOGIN]: (state: IAuthState, payload?: ILoginToken) => {
 
-        console.log(payload)
+        const responseToken = payload?.dinBody.token
+        const jwt = parseJwt(responseToken)
+       
 
         return {
             ...state,
             isAuthenticated: true,
+            user : jwt.sub,
             token: payload?.dinBody.token,
             loading: false,
         }

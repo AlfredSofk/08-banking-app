@@ -6,4 +6,9 @@ export interface ITransaction {
     timestamp: Date;
 }
 
+export interface IBankTransactionWithDrawFromATM {
+    accountNumber :	string
+    amount:	number
+}
+
 
