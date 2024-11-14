@@ -18,13 +18,12 @@ export const loginCases = {
 
         const responseToken = payload?.dinBody.token
         const jwt = parseJwt(responseToken)
-       
+
 
         return {
             ...state,
             isAuthenticated: true,
-            user : jwt.sub,
-            token: payload?.dinBody.token,
+            user: jwt.sub,
             loading: false,
         }
     },

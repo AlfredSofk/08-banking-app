@@ -17,8 +17,6 @@ export const getLoginToken = async ({ username, password }: IBodyLoginToken): Pr
         dinBody: { username, password },
     }
 
-    console.log({ body })
-
     try {
         const response = await http(url, HTTP_METHODS.POST, body)
         return loginTokenMapper(response);

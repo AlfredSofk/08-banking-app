@@ -10,15 +10,19 @@ interface IGuardProps {
 
 export const SessionGuard = ({ children }: IGuardProps) => {
 
-//   const {state} = useContext(AuthContext);
+    // const { state } = useContext(AuthContext);
 
-const {currentUser} = {currentUser : true}
+    const { currentUser } = { currentUser: true }
 
-//   state.isAuthenticated
+    //   state.isAuthenticated
+
+    // if (!state.isAuthenticated) {
+    //     return <Navigate to="/" replace />
+
+    // }
 
     if (!currentUser) {
         return <Navigate to="/" replace />
-
     }
     return children;
 };

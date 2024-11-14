@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
+import './style.scss';
 
 
-
-interface Props { 
-    children : ReactNode | ReactNode[];
+interface Props {
+    children: ReactNode | ReactNode[];
 }
 
-export const LayoutMain = ({children} : Props) => {
+export const LayoutMain = ({ children }: Props) => {
     return (
-        <section className="layout-main">
+        <main className="layout-main">
             {children}
-        </section>
+        </main>
     );
 }

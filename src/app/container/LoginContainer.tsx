@@ -1,12 +1,15 @@
 
 import LoginForm from "../ui/components/Login"
 import { useLoginToken } from "../core/hooks/useLoginToken"
+import { Navigate } from "react-router-dom"
 
 export default function LoginContainer() {
 
-    const { state , loginUser} = useLoginToken()
+    const { state, loginUser } = useLoginToken()
 
-    console.log({state})
-    
+    if (state.token && state.isAuthenticated) {
+        return <Navigate to={'home'} replace />
+    }
+
     return <LoginForm state={state} loginUser={loginUser} />
 }

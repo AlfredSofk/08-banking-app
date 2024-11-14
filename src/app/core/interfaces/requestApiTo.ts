@@ -20,7 +20,7 @@ export interface ITransactionDeposit {
     dinBody: BankTransactionDepositSucursal;
 }
 
-export IResBankTransactionWithDrawFromATM {
-    dinHeader : IDinHeader;
-    dinError : IDinError
+export interface IResBankTransactionWithDrawFromATM {
+    dinHeader: IDinHeader;
+    dinError: IDinError
 }
