@@ -8,7 +8,7 @@ export default function LoginContainer() {
     const { state, loginUser } = useLoginToken()
 
     if (state.token && state.isAuthenticated) {
-        return <Navigate to={'home'} replace />
+        return <Navigate to={'/home/inicio'} replace />
     }
 
     return <LoginForm state={state} loginUser={loginUser} />

@@ -27,7 +27,7 @@ export const useLoginToken = () => {
       setCookie('token', response.dinBody?.token)
       setCookie('username', data.username)
       dispatch(login(response as ILoginToken))
-      navigate('/home')
+      navigate('/home/inicio')
     });
   }
 

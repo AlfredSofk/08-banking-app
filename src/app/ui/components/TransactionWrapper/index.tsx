@@ -14,7 +14,6 @@ export const TransactionWrapper = ({ transactionType }: Props) => {
   console.log({ transactionType })
   return (
     <>
-      <h3 style={{ textTransform: 'capitalize' }}>{transactionType}</h3>
       {(() => {
         switch (transactionType.toLowerCase()) {
           case TransactionTypes.WITHDRAW:

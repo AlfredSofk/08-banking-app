@@ -6,6 +6,7 @@ import AppContainer from "../container/AppContainer";
 import LoginContainer from "../container/LoginContainer";
 import { TransactionWrapper } from "../ui/components/TransactionWrapper";
 import { TransactionTypes } from "../core/constants/transactionTypes";
+import DashboardContainer from "../container/DashboardContainer";
 
 export const router = createHashRouter([
     {
@@ -23,7 +24,7 @@ export const router = createHashRouter([
             {
                 path: "inicio",
                 index: true,
-                element: <h1>Inicio</h1>,
+                element: <DashboardContainer />,
             },
             {
                 path: "withdraw",

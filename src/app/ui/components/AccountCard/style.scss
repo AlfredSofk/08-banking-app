@@ -1,0 +1,36 @@
+
+
+.account-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 220px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+    }
+  
+    &__title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+  
+    &__number {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 1rem;
+    }
+  
+    &__balance {
+      font-size: 1.1rem;
+      color: #1abc9c;
+      font-weight: bold;
+    }
+  }
+  
