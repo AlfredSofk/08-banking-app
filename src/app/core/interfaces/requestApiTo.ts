@@ -25,7 +25,8 @@ interface IResTransaction {
     amountTransaction: number;
     transactionCost: number;
     typeTransaction: string;
-    timeStamp: Date
+    timeStamp: Date;
+    impactAccount?: string;
 }
 export interface ILoginToken {
     dinHeader: IDinHeader;

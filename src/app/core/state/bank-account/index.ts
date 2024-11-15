@@ -22,15 +22,22 @@ export const bankAccountCases = {
         }
 
     },
-    [bankAccountActionTypes.WITHDRAW]: (state: IAppState, payload?: IResDataTransaction, impactAccount?: string) => {
+    [bankAccountActionTypes.WITHDRAW]: (state: IAppState, payload: IResDataTransaction) => {
 
 
+        const { dinBody, impactAccount } = payload
 
+        const findedIndexAccount = state.userAccounts.findIndex(element => element.number === impactAccount)
 
-        return {
-            ...state
-        }
+        const { amount } = state.userAccounts[findedIndexAccount]
+
+        state.userAccounts[findedIndexAccount].amount = amount - (dinBody.amountTransaction + dinBody.transactionCost)
+
+        // return {
+        //     ...state
+        // }
     },
+
     [bankAccountActionTypes.TRANSFER]: (state: IAppState) => {
         return {
             ...state

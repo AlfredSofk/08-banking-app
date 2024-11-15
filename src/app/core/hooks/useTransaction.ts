@@ -16,14 +16,16 @@ export const useTransactions = () => {
 
     const retiroCajeroATM = (data: IFormBodyTransaction) => {
         dispatch(loadingBankAccount(true))
-        console.log("se realizo la ejecución del retiro")
 
+        const impactAccount: string = data.accountNumber
         doTransaction(TransactionNames.WITHDRAWATM, data).then((response) => {
+
+            console.log(impactAccount)
             if ("message" in response) {
                 dispatch(errorTransaction(response.message))
             }
 
-            dispatch(withdraw(response as IResDataTransaction))
+            dispatch(withdraw(response as IResDataTransaction, impactAccount))
         })
     }
 

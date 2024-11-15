@@ -1,5 +1,5 @@
 import { IResDataTransaction, IResGetDataClient } from "../../interfaces/requestApiTo";
-import { IRequestBodyTransaction } from "../../interfaces/requestToApi";
+
 
 
 export const bankAccountActionTypes = {
@@ -18,9 +18,12 @@ export const deposit = () => ({
     type: bankAccountActionTypes.DEPOSIT,
 });
 
-export const withdraw = (payload: IResDataTransaction) => ({
+export const withdraw = (payload: IResDataTransaction, impactAccount: string) => ({
     type: bankAccountActionTypes.WITHDRAW,
-    payload
+    payload: {
+        ...payload,
+        impactAccount
+    }
 });
 
 export const transfer = () => ({
