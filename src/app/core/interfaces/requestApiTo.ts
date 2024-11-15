@@ -9,6 +9,17 @@ interface BankTransactionDepositSucursal {
     amount: number;
 }
 
+interface IAccounts {
+    number: string;
+    amount: number;
+}
+
+interface IResDinBodyGetDataClient {
+    username: string;
+    rol : string | null;
+    accounts : IAccounts[];
+}
+
 export interface ILoginToken {
     dinHeader: IDinHeader;
     dinBody: dinBodyLoginToken
@@ -23,4 +34,10 @@ export interface ITransactionDeposit {
 export interface IResBankTransactionWithDrawFromATM {
     dinHeader: IDinHeader;
     dinError: IDinError
+}
+
+export interface IResGetDataClient{
+    dinHeader: IDinHeader;
+    dinBody: IResDinBodyGetDataClient;
+    dinError: IDinError;
 }

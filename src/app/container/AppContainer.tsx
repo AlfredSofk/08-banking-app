@@ -1,20 +1,22 @@
 import { LayoutMain } from "../ui/layouts/LayaoutMain"
 import App from '../../App';
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { SideMenu } from '../ui/components/SideMenu/index';
+import { ReactNode } from "react";
+import { TopBar } from "../ui/components/TopBar";
 
 
-export default function AppContainer() {
+export default function AppContainer() {	 
 
     return (
         <LayoutMain>
-            <SideMenu />
-            <App />
-            <nav>
-                <Link to='/home'>Home</Link>
-                <Link to='/acerca'>Acerca</Link>
-                <Link to='/'>Login</Link>
-            </nav>
+             <SideMenu />
+             <div className="layout__content">
+                <TopBar />
+                <div className="layout__main">
+                    <Outlet />
+                </div>
+             </div>
         </LayoutMain>
 
     )

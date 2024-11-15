@@ -1,5 +1,9 @@
 import { IBankTransactionWithDrawFromATM } from "./transaction";
 
+interface IDinBodyGetDataClient {
+    username: string;
+}
+
 export interface IDinHeader {
     dispositivo: string;
     idioma: string;
@@ -40,4 +44,9 @@ export interface ITransactionWithDrawFromATM {
     dinHeader : IDinHeader
     dinBody : IBankTransactionWithDrawFromATM
 
+}
+
+export interface IRequestBodyGetDataClient {
+    dinHeader: IDinHeader;
+    dinBody : IDinBodyGetDataClient
 }

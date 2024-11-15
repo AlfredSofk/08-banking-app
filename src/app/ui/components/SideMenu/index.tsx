@@ -1,66 +1,111 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaHome, FaUser, FaCog, FaQuestion, FaBars, FaChevronDown } from 'react-icons/fa';
+import { CiBank } from 'react-icons/ci';
+import './style.scss';
 
 export const SideMenu = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
+  const handleToggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-    const [isTransactionsOpen, setIsTransactionsOpen] = useState(false);
+  const handleNavigate = (path: string) => {
+    console.log(path)
+    navigate(path);
+  };
 
-    const toggleTransactions = () => {
-        setIsTransactionsOpen(!isTransactionsOpen);
-    };
+  return (
+    <aside className={`sidebar ${isExpanded ? 'sidebar--expanded' : ''}`} aria-label="Barra lateral de navegación">
+      <button className="sidebar__toggle" onClick={handleToggleSidebar} aria-label="Expandir menú">
+        <FaBars />
+      </button>
+      <div className="sidebar__logo"><CiBank /><p>BankU</p></div>
+      
+      <ul className="sidebar__menu">
+        <li className="sidebar__item">
+          <button
+            className="sidebar__button"
+            aria-label="Inicio"
+            onClick={() => handleNavigate('/home/inicio')}
+          >
+            <FaHome />
+            {isExpanded && <span className="sidebar__text">Inicio</span>}
+          </button>
+        </li>
 
-    return (
-        <nav className='side-menu' aria-label="Menú principal">
-            <button className='side-menu__toggle' aria-label="Abrir menú">
-                ☰
-            </button>
-            <ul className='side-menu__list'>
-                <li className='side-menu__item'>
-                    <button
-                        className='side-menu__link'
-                        aria-expanded={isTransactionsOpen}
-                        aria-controls="transacciones-menu"
-                        onClick={toggleTransactions}
-                    >
-                        Transacciones
-                    </button>
-                    {isTransactionsOpen && (
-                        <ul
-                            id="transacciones-menu"
-                            className='side-menu__dropdown'
-                            aria-label="Submenú de transacciones"
-                        >
-                            <li className='side-menu__dropdown-item'>
-                                <a href="#retirar" className='side-menu__dropdown-link'>Retirar Cajero</a>
-                            </li>
-                            <li className='side-menu__dropdown-item'>
-                                <a href="#depositar" className='side-menu__dropdown-link'>Depositar Cajero</a>
-                            </li>
-                            <li className='side-menu__dropdown-item'>
-                                <a href="#deposito" className='side-menu__dropdown-link'>Depósito</a>
-                            </li>
-                            <li className='side-menu__dropdown-item'>
-                                <a href="#transferencias" className='side-menu__dropdown-link'>Transferencias</a>
-                            </li>
-                            <li className='side-menu__dropdown-item'>
-                                <a href="#compraWeb" className='side-menu__dropdown-link'>Compra Web</a>
-                            </li>
-                            <li className='side-menu__dropdown-item'>
-                                <a href="#compraEstablecimiento" className='side-menu__dropdown-link'>Compra Establecimiento</a>
-                            </li>
-                        </ul>
-                    )}
-                </li>
-                <li className='side-menu__item'>
-                    <a href="#cuenta" className='side-menu__link'>Cuenta</a>
-                </li>
-                <li className={`$'side-menu__item' $'side-menu__item--bottom'`}>
-                    <a href="#acerca-de" className='side-menu__link'>Acerca de</a>
-                </li>
+        <li className="sidebar__item sidebar__item--dropdown">
+          <button
+            className="sidebar__button"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            aria-haspopup="true"
+            aria-expanded={isDropdownOpen}
+          >
+            <FaUser />
+            {isExpanded && <span className="sidebar__text">Transacciones</span>}
+            {isExpanded && <FaChevronDown className="sidebar__icon--dropdown" />}
+          </button>
+          {isDropdownOpen && isExpanded && (
+            <ul className="sidebar__submenu">
+              <li className="sidebar__submenu-item">
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/withdraw')}>
+                  Retirar Cajero
+                </button>
+              </li>
+              <li className="sidebar__submenu-item">
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/deposit')}>
+                  Depositar Cajero
+                </button>
+              </li>
+              <li className="sidebar__submenu-item">
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/deposit-account')}>
+                  Depósito
+                </button>
+              </li>
+              <li className="sidebar__submenu-item">
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/transfer')}>
+                  Transferencias
+                </button>
+              </li>
+              <li className="sidebar__submenu-item">
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/purchase-web')}>
+                  Compra Web
+                </button>
+              </li>
+              <li className="sidebar__submenu-item">
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/purchase-store')}>
+                  Compra Establecimiento
+                </button>
+              </li>
             </ul>
-        </nav>
-    );
+          )}
+        </li>
 
+        <li className="sidebar__item">
+          <button
+            className="sidebar__button"
+            aria-label="Cuenta"
+            onClick={() => handleNavigate('/home/account')}
+          >
+            <FaCog />
+            {isExpanded && <span className="sidebar__text">Cuenta</span>}
+          </button>
+        </li>
 
-
-}
+        <li className="sidebar__item">
+          <button
+            className="sidebar__button"
+            aria-label="Ayuda"
+            onClick={() => handleNavigate('/home/about')}
+          >
+            <FaQuestion />
+            {isExpanded && <span className="sidebar__text">Acerca de</span>}
+          </button>
+        </li>
+      </ul>
+    </aside>
+  );
+};

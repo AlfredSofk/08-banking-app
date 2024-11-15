@@ -1,0 +1,73 @@
+
+// .withdrawal {
+//     padding: 2rem;
+//     background-color: #ffffff;
+//     border-radius: 8px;
+//     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+//     max-width: 400px;
+//     margin: 0 auto;
+  
+//     &__title {
+//       font-size: 1.5rem;
+//       font-weight: bold;
+//       margin-bottom: 1.5rem;
+//       color: #333;
+//       text-align: center;
+//     }
+  
+//     &__form {
+//       display: flex;
+//       flex-direction: column;
+//     }
+  
+//     &__form-group {
+//       margin-bottom: 1rem;
+//       display: flex;
+//       flex-direction: column;
+//     }
+  
+//     &__label {
+//       font-size: 0.9rem;
+//       color: #555;
+//       margin-bottom: 0.5rem;
+//     }
+  
+//     &__input {
+//       padding: 0.75rem;
+//       font-size: 1rem;
+//       border: 1px solid #ccc;
+//       border-radius: 4px;
+//       outline: none;
+//       transition: border-color 0.3s ease;
+  
+//       &:focus {
+//         border-color: #1abc9c;
+//       }
+  
+//       &[aria-invalid="true"] {
+//         border-color: #e74c3c;
+//       }
+//     }
+  
+//     &__error {
+//       font-size: 0.85rem;
+//       color: #e74c3c;
+//       margin-top: 0.25rem;
+//     }
+  
+//     &__submit {
+//       padding: 0.75rem;
+//       font-size: 1rem;
+//       color: #ffffff;
+//       background-color: #1abc9c;
+//       border: none;
+//       border-radius: 4px;
+//       cursor: pointer;
+//       transition: background-color 0.3s ease;
+  
+//       &:hover {
+//         background-color: #16a085;
+//       }
+//     }
+//   }
+  

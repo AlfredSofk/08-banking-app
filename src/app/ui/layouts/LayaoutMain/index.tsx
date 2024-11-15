@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import './style.scss';
+import { SideMenu } from "../../components/SideMenu";
+import { TopBar } from "../../components/TopBar";
 
 
 interface Props {
@@ -8,8 +10,10 @@ interface Props {
 
 export const LayoutMain = ({ children }: Props) => {
     return (
-        <main className="layout-main">
+
+        <main className="layout">
             {children}
         </main>
+   
     );
 }

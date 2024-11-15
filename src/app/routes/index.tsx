@@ -6,6 +6,8 @@ import AppContainer from "../container/AppContainer";
 import Deposit from "../ui/components/Deposit";
 import Dashboard from "../ui/components/Dashboard";
 import LoginContainer from "../container/LoginContainer";
+import { TransactionWrapper } from "../ui/components/TransactionWrapper";
+import { TransactionTypes } from "../core/constants/transactionTypes";
 
 export const router = createHashRouter([
     {
@@ -14,15 +16,20 @@ export const router = createHashRouter([
             <AuthProvider>
                 <SessionGuard>
                     <AppProvider>
-                        <AppContainer />
+                        <AppContainer/>
                     </AppProvider>
                 </SessionGuard>
             </AuthProvider>
         ),
         children: [
             {
-                path: "windraw",
-                element: <h1>Windraw</h1>,
+                path: "inicio",
+                index: true,
+                element: <h1>Inicio</h1>,
+            },
+            {
+                path: "withdraw",
+                element: <TransactionWrapper transactionType={TransactionTypes.WITHDRAW} />,
             },
             {
                 path: "dashboard",
