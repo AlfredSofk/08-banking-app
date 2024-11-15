@@ -1,7 +1,10 @@
-import { IBankTransactionWithDrawFromATM } from "./transaction";
-
-interface IDinBodyGetDataClient {
+export interface IDinBodyGetDataClient {
     username: string;
+}
+
+export interface IRequestBodyWithDrawalATM {
+    accountNumber: string;
+    amount: number;
 }
 
 export interface IDinHeader {
@@ -40,13 +43,22 @@ export interface IRequestMs {
     dinError: IDinError;
 }
 
-export interface ITransactionWithDrawFromATM {
-    dinHeader : IDinHeader
-    dinBody : IBankTransactionWithDrawFromATM
-
-}
-
 export interface IRequestBodyGetDataClient {
     dinHeader: IDinHeader;
-    dinBody : IDinBodyGetDataClient
+    dinBody: IDinBodyGetDataClient
 }
+
+export interface IFormBodyTransaction {
+    accountNumber?: string;
+    accountNumberClient?: string;
+    accountNumberSender?: string;
+    accountNumberReceiver?: string;
+    typeBuys?: number;
+    amount: number
+}
+export interface IRequestBodyTransaction {
+    dinHeader: IDinHeader
+    dinBody: IFormBodyTransaction
+
+}
+

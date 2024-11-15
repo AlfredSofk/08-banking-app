@@ -1,16 +1,20 @@
 import { HTTP_METHODS } from "../../constants/httpMethods";
+import { getCookie } from "../../utils/cookies";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const http = async (url: string, method: HTTP_METHODS, body?: any, token? : string) => {
+export const http = async (url: string, method: HTTP_METHODS, body?: any, token?: string) => {
 
     let headersHttp = {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        
+
     }
 
-    if(token){
-        headersHttp['Authorization'] = `Bearer ${token}`
+
+    const cookieToken = getCookie('token')
+
+    if (cookieToken !== 'undefined') {
+        headersHttp['Authorization'] = `Bearer ${cookieToken}`
     }
 
     try {

@@ -24,7 +24,7 @@ export const SideMenu = () => {
         <FaBars />
       </button>
       <div className="sidebar__logo"><CiBank /><p>BankU</p></div>
-      
+
       <ul className="sidebar__menu">
         <li className="sidebar__item">
           <button
@@ -56,7 +56,7 @@ export const SideMenu = () => {
                 </button>
               </li>
               <li className="sidebar__submenu-item">
-                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/deposit')}>
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/depositATM')}>
                   Depositar Cajero
                 </button>
               </li>

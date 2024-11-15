@@ -3,8 +3,6 @@ import { AuthProvider } from "../core/state/authContext/AuthContext";
 import { AppProvider } from '../core/state/appContext/AppContext';
 import { SessionGuard } from './guards/GuardSession';
 import AppContainer from "../container/AppContainer";
-import Deposit from "../ui/components/Deposit";
-import Dashboard from "../ui/components/Dashboard";
 import LoginContainer from "../container/LoginContainer";
 import { TransactionWrapper } from "../ui/components/TransactionWrapper";
 import { TransactionTypes } from "../core/constants/transactionTypes";
@@ -16,7 +14,7 @@ export const router = createHashRouter([
             <AuthProvider>
                 <SessionGuard>
                     <AppProvider>
-                        <AppContainer/>
+                        <AppContainer />
                     </AppProvider>
                 </SessionGuard>
             </AuthProvider>
@@ -32,12 +30,8 @@ export const router = createHashRouter([
                 element: <TransactionWrapper transactionType={TransactionTypes.WITHDRAW} />,
             },
             {
-                path: "dashboard",
-                element: <Dashboard />,
-            },
-            {
-                path: "deposit",
-                element: <Deposit />,
+                path: "depositATM",
+                element: <TransactionWrapper transactionType={TransactionTypes.DEPOSIT} />,
             },
         ],
     },

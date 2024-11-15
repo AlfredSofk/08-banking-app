@@ -5,8 +5,10 @@ import { errorLogin, loading, login } from "../state/login/action";
 import { AuthContext } from "../state/authContext/AuthContext";
 import { ILoginToken } from "../interfaces/requestApiTo";
 
-import { useNavigate } from 'react-router-dom';
+
 import { setCookie } from "../utils/cookies";
+import { useNavigate } from "react-router-dom";
+
 
 
 export const useLoginToken = () => {
@@ -23,12 +25,13 @@ export const useLoginToken = () => {
       }
 
       setCookie('token', response.dinBody?.token)
+      setCookie('username', data.username)
       dispatch(login(response as ILoginToken))
-      navigate('home')
+      navigate('/home')
     });
-
-
   }
+
+
 
   return { state, loginUser }
 }

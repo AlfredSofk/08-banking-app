@@ -16,10 +16,17 @@ interface IAccounts {
 
 interface IResDinBodyGetDataClient {
     username: string;
-    rol : string | null;
-    accounts : IAccounts[];
+    rol: string | null;
+    accounts: IAccounts[];
 }
 
+interface IResTransaction {
+    id: string;
+    amountTransaction: number;
+    transactionCost: number;
+    typeTransaction: string;
+    timeStamp: Date
+}
 export interface ILoginToken {
     dinHeader: IDinHeader;
     dinBody: dinBodyLoginToken
@@ -36,8 +43,16 @@ export interface IResBankTransactionWithDrawFromATM {
     dinError: IDinError
 }
 
-export interface IResGetDataClient{
+export interface IResGetDataClient {
     dinHeader: IDinHeader;
     dinBody: IResDinBodyGetDataClient;
     dinError: IDinError;
 }
+
+export interface IResDataTransaction {
+    dinHeader: IDinHeader;
+    dinBody: IResTransaction;
+    dinError: IDinError;
+}
+
+

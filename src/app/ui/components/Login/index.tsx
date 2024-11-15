@@ -27,7 +27,7 @@ export default function LoginForm({ state, loginUser }: Props) {
         }
     })
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         const dataForm: IBodyLoginToken = {
             username: data.usuario,
             password: data.password

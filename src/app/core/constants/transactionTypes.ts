@@ -6,3 +6,9 @@ export enum TransactionTypes {
     PURCHASE_WEB = 'purchase-web',
     PURCHASE_STORE = 'purchase-store',
 }
+
+
+export enum TransactionNames {
+    WITHDRAWATM = 'retitarCajero',
+    DEPOSITATM = 'depositarCajero',
+}

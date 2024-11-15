@@ -7,7 +7,8 @@ export const loginActionTypes = {
     LOGIN: 'LOGIN',
     LOGOUT: 'LOGOUT',
     LOADING: 'LOADING',
-    ERROR: 'ERROR'
+    ERROR: 'ERROR',
+
 }
 
 
@@ -29,3 +30,4 @@ export const errorLogin = (error: string) => ({
     type: loginActionTypes.ERROR,
     payload: error
 });
+
