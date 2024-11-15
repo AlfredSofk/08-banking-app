@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AppContext } from "../state/appContext/AppContext"
 import { useNavigate } from "react-router-dom"
-import { errorTransaction, loadingBankAccount, withdraw } from "../state/bank-account/action"
+import { depositAccount, errorTransaction, loadingBankAccount, withdraw } from "../state/bank-account/action"
 import { doTransaction } from "../services/doTransaction"
 import { TransactionNames } from "../constants/transactionTypes"
 import { IFormBodyTransaction } from "../interfaces/requestToApi"
@@ -43,5 +43,19 @@ export const useTransactions = () => {
         // })
     }
 
-    return { state, dispatch, retiroCajeroATM, depositarCajeroATM }
+    const depositarAgencia = (data : IFormBodyTransaction) => {
+        dispatch(loadingBankAccount(true))
+
+        const impactAccount: string = data.accountNumber
+        doTransaction(TransactionNames.DEPOSITACCOUNT, data).then((response) => {
+            if ("message" in response) {
+                dispatch(errorTransaction(response.message))
+            }
+
+            dispatch(depositAccount(response as IResDataTransaction, impactAccount))
+        })
+
+    }
+
+    return { state, dispatch, retiroCajeroATM, depositarCajeroATM, depositarAgencia }
 }

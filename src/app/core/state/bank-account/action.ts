@@ -5,6 +5,7 @@ import { IResDataTransaction, IResGetDataClient } from "../../interfaces/request
 export const bankAccountActionTypes = {
 
     DEPOSIT: 'DEPOSIT',
+    DEPOSITACCOUNT: 'DEPOSITACCOUNT',
     WITHDRAW: 'WITHDRAW',
     TRANSFER: 'TRANSFER',
     PURCHASE: 'PURCHASE',
@@ -17,6 +18,14 @@ export const bankAccountActionTypes = {
 export const deposit = () => ({
     type: bankAccountActionTypes.DEPOSIT,
 });
+
+export const depositAccount = (payload : IResDataTransaction, impactAccount : string) => ({
+    type: bankAccountActionTypes.DEPOSITACCOUNT,
+    payload: {
+        ...payload,
+        impactAccount
+    }
+})
 
 export const withdraw = (payload: IResDataTransaction, impactAccount: string) => ({
     type: bankAccountActionTypes.WITHDRAW,

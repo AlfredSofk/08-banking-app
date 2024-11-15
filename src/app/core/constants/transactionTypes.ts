@@ -11,4 +11,5 @@ export enum TransactionTypes {
 export enum TransactionNames {
     WITHDRAWATM = 'retitarCajero',
     DEPOSITATM = 'depositarCajero',
+    DEPOSITACCOUNT = 'deposit',
 }

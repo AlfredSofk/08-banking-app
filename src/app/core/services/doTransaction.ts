@@ -25,7 +25,7 @@ export const doTransaction = async (transaction: string, body: IFormBodyTransact
         bodyRequest.push(bodyRe)
     }
 
-    if (transaction === TransactionNames.DEPOSITATM) {
+    if (transaction === TransactionNames.DEPOSITATM || TransactionNames.DEPOSITACCOUNT) {
         const bodyRe: IRequestBodyTransaction = {
             dinHeader: { ...headers },
             dinBody: {

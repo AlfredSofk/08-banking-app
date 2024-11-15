@@ -34,6 +34,18 @@ export const router = createHashRouter([
                 path: "depositATM",
                 element: <TransactionWrapper transactionType={TransactionTypes.DEPOSIT} />,
             },
+            {
+                path: "deposit-account",
+                element: <TransactionWrapper transactionType={TransactionTypes.DEPOSIT_ACCOUNT} />,
+            },
+            {
+                path : "account",
+                element : <h1>Account</h1>
+            },
+            {
+                path : "about",
+                element : <h1>About</h1>
+            }
         ],
     },
     {

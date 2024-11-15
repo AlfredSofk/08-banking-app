@@ -6,11 +6,12 @@ import './style.scss'
 interface Props {
   typeTransactionATM: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  esRetiro: boolean
   transactionHook: (data: any) => void
 }
 
 
-export const Withdraw = ({ typeTransactionATM, transactionHook }: Props) => {
+export const Withdraw = ({ typeTransactionATM, esRetiro, transactionHook }: Props) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -24,7 +25,7 @@ export const Withdraw = ({ typeTransactionATM, transactionHook }: Props) => {
 
   return (
     <section className="withdrawal" aria-labelledby="withdrawal-heading">
-      <h2 id="withdrawal-heading" className="withdrawal__title">{typeTransactionATM} de Efectivo</h2>
+      <h2 id="withdrawal-heading" className="withdrawal__title">{typeTransactionATM} </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="withdrawal__form" noValidate>
 
         <div className="withdrawal__form-group">
@@ -51,7 +52,7 @@ export const Withdraw = ({ typeTransactionATM, transactionHook }: Props) => {
         </div>
 
         <div className="withdrawal__form-group">
-          <label htmlFor="amount" className="withdrawal__label">Monto a Retirar</label>
+          <label htmlFor="amount" className="withdrawal__label">Monto a {esRetiro ? 'Retirar' : 'Depositar'}</label>
           <input
             id="amount"
             type="number"
@@ -75,7 +76,7 @@ export const Withdraw = ({ typeTransactionATM, transactionHook }: Props) => {
           )}
         </div>
 
-        <button type="submit" className="withdrawal__submit">Retirar</button>
+        <button type="submit" className="withdrawal__submit">{esRetiro ? 'Retirar' : 'Depositar'}</button>
       </form>
     </section>
   );

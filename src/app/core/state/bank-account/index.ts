@@ -22,6 +22,22 @@ export const bankAccountCases = {
         }
 
     },
+
+    [bankAccountActionTypes.DEPOSITACCOUNT]: (state: IAppState, payload: IResDataTransaction) => {
+
+        const { dinBody, impactAccount } = payload
+
+        const findedIndexAccount = state.userAccounts.findIndex(element => element.number === impactAccount)
+
+        const { amount } = state.userAccounts[findedIndexAccount]
+
+        state.userAccounts[findedIndexAccount].amount = amount + dinBody.amountTransaction
+
+        return {
+            ...state
+        }
+    },
+
     [bankAccountActionTypes.WITHDRAW]: (state: IAppState, payload: IResDataTransaction) => {
 
 
@@ -31,11 +47,11 @@ export const bankAccountCases = {
 
         const { amount } = state.userAccounts[findedIndexAccount]
 
-        state.userAccounts[findedIndexAccount].amount = amount - (dinBody.amountTransaction + dinBody.transactionCost)
+        state.userAccounts[findedIndexAccount].amount = amount + (dinBody.amountTransaction + dinBody.transactionCost)
 
-        // return {
-        //     ...state
-        // }
+        return {
+            ...state
+        }
     },
 
     [bankAccountActionTypes.TRANSFER]: (state: IAppState) => {
