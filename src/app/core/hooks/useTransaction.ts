@@ -26,6 +26,8 @@ export const useTransactions = () => {
             }
 
             dispatch(withdraw(response as IResDataTransaction, impactAccount))
+            dispatch(loadingBankAccount(false))
+            alert("Se ha realizado el retiro con exito")
         })
     }
 

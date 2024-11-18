@@ -10,18 +10,18 @@ interface Props {
 
 export const TransactionWrapper = ({ transactionType }: Props) => {
 
-  const { retiroCajeroATM, depositarCajeroATM, depositarAgencia } = useTransactions()
+  const { state, retiroCajeroATM, depositarCajeroATM, depositarAgencia } = useTransactions()
   console.log({ transactionType })
   return (
     <>
       {(() => {
         switch (transactionType.toLowerCase()) {
           case TransactionTypes.WITHDRAW:
-            return <Withdraw typeTransactionATM='retiro ATM' transactionHook={retiroCajeroATM} esRetiro={true}/>;
+            return <Withdraw typeTransactionATM='retiro ATM' state={state} transactionHook={retiroCajeroATM} esRetiro={true} />;
           case TransactionTypes.DEPOSIT:
-            return <Withdraw typeTransactionATM='deposito ATM' transactionHook={depositarCajeroATM} esRetiro={false}/>;
+            return <Withdraw typeTransactionATM='deposito ATM' state={state} transactionHook={depositarCajeroATM} esRetiro={false}/>;
           case TransactionTypes.DEPOSIT_ACCOUNT:
-            return <Withdraw typeTransactionATM='deposito Agencia' transactionHook={depositarAgencia} esRetiro={false} />;
+            return <Withdraw typeTransactionATM='deposito Agencia' state={state} transactionHook={depositarAgencia} esRetiro={false} />;
           //   case 'depositar cajero':
           //     return <Deposit />;
           //   case 'deposito':

@@ -13,6 +13,7 @@
         margin-bottom: 1.5rem;
         color: #333;
         text-align: center;
+        text-transform: capitalize;
     }
 
     &__form {
@@ -57,6 +58,7 @@
     }
 
     &__submit {
+        text-transform: capitalize;
         padding: 0.75rem;
         font-size: 1rem;
         color: #ffffff;

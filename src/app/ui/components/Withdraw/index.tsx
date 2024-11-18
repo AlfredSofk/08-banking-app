@@ -1,9 +1,13 @@
 
 import { useForm } from 'react-hook-form';
 import './style.scss'
+import { useEffect } from 'react';
+import { Loader } from '../Loader';
 
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: any,
   typeTransactionATM: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   esRetiro: boolean
@@ -11,16 +15,21 @@ interface Props {
 }
 
 
-export const Withdraw = ({ typeTransactionATM, esRetiro, transactionHook }: Props) => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+export const Withdraw = ({ state, typeTransactionATM, transactionHook, esRetiro }: Props) => {
 
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+  useEffect(() => {
+    reset()
+  }, [])
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     console.log(typeTransactionATM)
     console.log('Datos de retiro:', data);
     transactionHook(data)
+    reset()
   };
 
   return (
@@ -76,7 +85,12 @@ export const Withdraw = ({ typeTransactionATM, esRetiro, transactionHook }: Prop
           )}
         </div>
 
-        <button type="submit" className="withdrawal__submit">{esRetiro ? 'Retirar' : 'Depositar'}</button>
+        {state.loading
+          ? <Loader />
+          : <button type="submit" className="withdrawal__submit">{typeTransactionATM}</button>
+        }
+
+        {/* <button type="submit" className="withdrawal__submit">{esRetiro ? 'Retirar' : 'Depositar'}</button> */}
       </form>
     </section>
   );
