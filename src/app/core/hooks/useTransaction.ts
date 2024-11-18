@@ -12,7 +12,7 @@ import { IResDataTransaction } from "../interfaces/requestApiTo"
 export const useTransactions = () => {
 
     const { state, dispatch } = useContext(AppContext)
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const retiroCajeroATM = (data: IFormBodyTransaction) => {
         dispatch(loadingBankAccount(true))
@@ -28,7 +28,6 @@ export const useTransactions = () => {
             dispatch(withdraw(response as IResDataTransaction, impactAccount))
         })
     }
-
 
     const depositarCajeroATM = (data: IFormBodyTransaction) => {
         dispatch(loadingBankAccount(true))
@@ -53,6 +52,20 @@ export const useTransactions = () => {
             }
 
             dispatch(depositAccount(response as IResDataTransaction, impactAccount))
+        })
+
+    }
+
+    const transferencias = (data: IFormBodyTransaction) => {
+        dispatch(loadingBankAccount(true))
+
+        const impactAccount: string = data.accountNumber
+        doTransaction(TransactionNames.DEPOSITTRANSFER, data).then((response) => {
+            if ("message" in response) {
+                dispatch(errorTransaction(response.message))
+            }
+
+            dispatch(transfer(response as IResDataTransaction, impactAccount))
         })
 
     }

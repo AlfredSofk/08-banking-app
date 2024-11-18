@@ -12,4 +12,5 @@ export enum TransactionNames {
     WITHDRAWATM = 'retitarCajero',
     DEPOSITATM = 'depositarCajero',
     DEPOSITACCOUNT = 'deposit',
+    DEPOSITTRANSFER = 'depositTrasfer',
 }

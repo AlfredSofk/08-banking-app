@@ -35,9 +35,15 @@ export const withdraw = (payload: IResDataTransaction, impactAccount: string) =>
     }
 });
 
-export const transfer = () => ({
+export const transfer = (payload: IResDataTransaction, impactAccount: string, destinyAccount: string) => ({
     type: bankAccountActionTypes.TRANSFER,
+    payload: {
+        ...payload,
+        impactAccount,
+        destinyAccount
+    }
 });
+
 
 export const purchase = () => ({
     type: bankAccountActionTypes.PURCHASE,
