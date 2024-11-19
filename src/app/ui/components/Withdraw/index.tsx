@@ -65,23 +65,23 @@ export const Transaction = ({ state,titleTransaction,  transactionTarget, transa
         
         {transactionTarget === TransactionTargets.TRANSFERENCIA  &&
           <div className="withdrawal__form-group">
-            <label htmlFor="accountNumber" className="withdrawal__label">{transactionTarget == TransactionTargets.TRANSFERENCIA ? 'Cuenta destino' : 'Número de Cuenta'}</label>
+            <label htmlFor="accountNumberReceiver" className="withdrawal__label">{transactionTarget == TransactionTargets.TRANSFERENCIA ? 'Cuenta destino' : 'Número de Cuenta'}</label>
             <input
-              id="accountNumber"
+              id="accountNumberReceiver"
               type="text"
               className="withdrawal__input"
-              {...register('accountNumber', {
+              {...register('accountNumberReceiver', {
                 required: 'El número de cuenta es requerido',
                 // pattern: {
                 //   value: /^[0-9]}$/,
                 //   message: 'El número de cuenta debe tener 10 dígitos'
                 // }
               })}
-              aria-invalid={errors.accountNumber ? "true" : "false"}
-              aria-describedby="accountNumber-error"
+              aria-invalid={errors.accountNumberReceiver ? "true" : "false"}
+              aria-describedby="accountNumberReceiver-error"
             />
-            {errors.accountNumber && (
-              <span id="accountNumber-error" className="withdrawal__error" role="alert">
+            {errors.accountNumberReceiver && (
+              <span id="accountNumberReceiver-error" className="withdrawal__error" role="alert">
                 {errors.accountNumber.message}
               </span>
             )}
