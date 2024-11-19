@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AppContext } from "../state/appContext/AppContext"
 import { useNavigate } from "react-router-dom"
-import { depositAccount, errorTransaction, loadingBankAccount, withdraw } from "../state/bank-account/action"
+import { deposit, depositAccount, errorTransaction, loadingBankAccount, transfer, withdraw } from "../state/bank-account/action"
 import { doTransaction } from "../services/doTransaction"
 import { TransactionNames } from "../constants/transactionTypes"
 import { IFormBodyTransaction } from "../interfaces/requestToApi"
@@ -35,13 +35,16 @@ export const useTransactions = () => {
         dispatch(loadingBankAccount(true))
         console.log("se realizo la ejecución del deposito")
 
-        // doTransaction(TransactionNames.DEPOSITATM, data).then((response) => {
-        //     if ("message" in response) {
-        //         dispatch(errorTransaction(response.message))
-        //     }
+        const impactAccount: string = data.accountNumber
+        doTransaction(TransactionNames.DEPOSITATM, data).then((response) => {
+            if ("message" in response) {
+                dispatch(errorTransaction(response.message))
+            }
 
-        //     dispatch(deposit(response as IResDataTransaction))
-        // })
+            dispatch(deposit(response as IResDataTransaction, impactAccount))
+            dispatch(loadingBankAccount(false))
+            alert("Se ha realizado el deposito ATM con exito")
+        })
     }
 
     const depositarAgencia = (data : IFormBodyTransaction) => {
@@ -52,8 +55,9 @@ export const useTransactions = () => {
             if ("message" in response) {
                 dispatch(errorTransaction(response.message))
             }
-
             dispatch(depositAccount(response as IResDataTransaction, impactAccount))
+            dispatch(loadingBankAccount(false))
+            alert("Se ha realizado la transferencia Agencia con exito")
         })
 
     }
@@ -62,15 +66,18 @@ export const useTransactions = () => {
         dispatch(loadingBankAccount(true))
 
         const impactAccount: string = data.accountNumber
+        const destinyAccount: string = data.accountNumberReceiver
         doTransaction(TransactionNames.DEPOSITTRANSFER, data).then((response) => {
             if ("message" in response) {
                 dispatch(errorTransaction(response.message))
             }
 
-            dispatch(transfer(response as IResDataTransaction, impactAccount))
+            dispatch(transfer(response as IResDataTransaction, impactAccount, destinyAccount))
+            dispatch(loadingBankAccount(false))
+            alert('Deposito de Transferencia realizada exitosamente')
         })
 
     }
 
-    return { state, dispatch, retiroCajeroATM, depositarCajeroATM, depositarAgencia }
+    return { state, dispatch, retiroCajeroATM, depositarCajeroATM, depositarAgencia, transferencias }
 }

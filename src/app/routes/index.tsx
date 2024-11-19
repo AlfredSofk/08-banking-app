@@ -27,16 +27,20 @@ export const router = createHashRouter([
                 element: <DashboardContainer />,
             },
             {
-                path: "withdraw",
+                path: TransactionTypes.WITHDRAW,
                 element: <TransactionWrapper transactionType={TransactionTypes.WITHDRAW} />,
             },
             {
-                path: "depositATM",
+                path: TransactionTypes.DEPOSIT,
                 element: <TransactionWrapper transactionType={TransactionTypes.DEPOSIT} />,
             },
             {
-                path: "deposit-account",
+                path: TransactionTypes.DEPOSIT_ACCOUNT,
                 element: <TransactionWrapper transactionType={TransactionTypes.DEPOSIT_ACCOUNT} />,
+            },
+            {
+                path: TransactionTypes.TRANSFER,
+                element: <TransactionWrapper transactionType={TransactionTypes.TRANSFER} />,
             },
             {
                 path : "account",

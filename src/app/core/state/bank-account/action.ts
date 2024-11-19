@@ -15,8 +15,12 @@ export const bankAccountActionTypes = {
 }
 
 
-export const deposit = () => ({
+export const deposit = (payload: IResDataTransaction, impactAccount: string) => ({
     type: bankAccountActionTypes.DEPOSIT,
+    payload: {
+        ...payload,
+        impactAccount
+    }
 });
 
 export const depositAccount = (payload : IResDataTransaction, impactAccount : string) => ({

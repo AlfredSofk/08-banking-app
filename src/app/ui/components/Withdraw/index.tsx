@@ -1,44 +1,47 @@
 
 import { useForm } from 'react-hook-form';
 import './style.scss'
+import { IAppState } from '../../../core/interfaces/bankAccount';
+import { TransactionTargets } from '../../../core/constants/transactionTypes';
+import { Loader } from '../Loader/index';
 import { useEffect } from 'react';
-import { Loader } from '../Loader';
 
 
 interface Props {
+  state : IAppState
+  titleTransaction: string
+  transactionTarget: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  state: any,
-  typeTransactionATM: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  esRetiro: boolean
   transactionHook: (data: any) => void
 }
 
 
-
-export const Withdraw = ({ state, typeTransactionATM, transactionHook, esRetiro }: Props) => {
+export const Transaction = ({ state,titleTransaction,  transactionTarget, transactionHook }: Props) => {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  useEffect(() => {
-    reset()
-  }, [])
 
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
-    console.log(typeTransactionATM)
+    console.log(titleTransaction)
     console.log('Datos de retiro:', data);
     transactionHook(data)
     reset()
   };
 
+  
+  useEffect(() => {
+    reset()
+  }, [])
+
   return (
     <section className="withdrawal" aria-labelledby="withdrawal-heading">
-      <h2 id="withdrawal-heading" className="withdrawal__title">{typeTransactionATM} </h2>
+      <h2 id="withdrawal-heading" className="withdrawal__title">{titleTransaction} </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="withdrawal__form" noValidate>
 
         <div className="withdrawal__form-group">
-          <label htmlFor="accountNumber" className="withdrawal__label">Número de Cuenta</label>
+          <label htmlFor="accountNumber" className="withdrawal__label">{transactionTarget == TransactionTargets.TRANSFERENCIA ? 'Cuenta principal' : 'Número de Cuenta'}</label>
           <input
             id="accountNumber"
             type="text"
@@ -59,9 +62,34 @@ export const Withdraw = ({ state, typeTransactionATM, transactionHook, esRetiro 
             </span>
           )}
         </div>
+        
+        {transactionTarget === TransactionTargets.TRANSFERENCIA  &&
+          <div className="withdrawal__form-group">
+            <label htmlFor="accountNumber" className="withdrawal__label">{transactionTarget == TransactionTargets.TRANSFERENCIA ? 'Cuenta destino' : 'Número de Cuenta'}</label>
+            <input
+              id="accountNumber"
+              type="text"
+              className="withdrawal__input"
+              {...register('accountNumber', {
+                required: 'El número de cuenta es requerido',
+                // pattern: {
+                //   value: /^[0-9]}$/,
+                //   message: 'El número de cuenta debe tener 10 dígitos'
+                // }
+              })}
+              aria-invalid={errors.accountNumber ? "true" : "false"}
+              aria-describedby="accountNumber-error"
+            />
+            {errors.accountNumber && (
+              <span id="accountNumber-error" className="withdrawal__error" role="alert">
+                {errors.accountNumber.message}
+              </span>
+            )}
+          </div>   
+        }
 
         <div className="withdrawal__form-group">
-          <label htmlFor="amount" className="withdrawal__label">Monto a {esRetiro ? 'Retirar' : 'Depositar'}</label>
+          <label htmlFor="amount" className="withdrawal__label">{`Monto a ${TransactionTargets.TRANSFERENCIA}`}</label>
           <input
             id="amount"
             type="number"
@@ -84,13 +112,11 @@ export const Withdraw = ({ state, typeTransactionATM, transactionHook, esRetiro 
             </span>
           )}
         </div>
-
-        {state.loading
-          ? <Loader />
-          : <button type="submit" className="withdrawal__submit">{typeTransactionATM}</button>
-        }
-
-        {/* <button type="submit" className="withdrawal__submit">{esRetiro ? 'Retirar' : 'Depositar'}</button> */}
+          
+          { state.loading 
+            ? <Loader />
+            :<button type="submit" className="withdrawal__submit">{transactionTarget ? 'Retirar' : 'Depositar'}</button>
+          }
       </form>
     </section>
   );

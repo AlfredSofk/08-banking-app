@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaCog, FaQuestion, FaBars, FaChevronDown } from 'react-icons/fa';
 import { CiBank } from 'react-icons/ci';
 import './style.scss';
+import { TransactionTypes } from '../../../core/constants/transactionTypes';
 
 export const SideMenu = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -14,8 +15,8 @@ export const SideMenu = () => {
   };
 
   const handleNavigate = (path: string) => {
-    console.log(path)
-    navigate(path);
+    let newPath = `/home/${path}`;
+    navigate(newPath);
   };
 
   return (
@@ -30,7 +31,7 @@ export const SideMenu = () => {
           <button
             className="sidebar__button"
             aria-label="Inicio"
-            onClick={() => handleNavigate('/home/inicio')}
+            onClick={() => handleNavigate('inicio')}
           >
             <FaHome />
             {isExpanded && <span className="sidebar__text">Inicio</span>}
@@ -51,22 +52,22 @@ export const SideMenu = () => {
           {isDropdownOpen && isExpanded && (
             <ul className="sidebar__submenu">
               <li className="sidebar__submenu-item">
-                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/withdraw')}>
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.WITHDRAW)}>
                   Retirar Cajero
                 </button>
               </li>
               <li className="sidebar__submenu-item">
-                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/depositATM')}>
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.DEPOSIT)}>
                   Depositar Cajero
                 </button>
               </li>
               <li className="sidebar__submenu-item">
-                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/deposit-account')}>
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.DEPOSIT_ACCOUNT)}>
                   Depósito
                 </button>
               </li>
               <li className="sidebar__submenu-item">
-                <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/transfer')}>
+                <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.TRANSFER)}>
                   Transferencias
                 </button>
               </li>

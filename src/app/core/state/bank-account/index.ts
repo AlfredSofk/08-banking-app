@@ -62,7 +62,15 @@ export const bankAccountCases = {
         }
     },
 
-    [bankAccountActionTypes.TRANSFER]: (state: IAppState) => {
+    [bankAccountActionTypes.TRANSFER]: (state: IAppState, payload: IResDataTransaction) => {
+
+        const stateCopy = { ...state }
+        const { dinBody, impactAccount } = payload
+        const findedIndexAccount = stateCopy.userAccounts.findIndex(element => element.number === impactAccount)
+        const amountAux = stateCopy.userAccounts[findedIndexAccount].amount
+        const transactionFee = (dinBody.amountTransaction + dinBody.transactionCost)
+        stateCopy.userAccounts[findedIndexAccount].amount = amountAux - transactionFee
+
         return {
             ...state
 

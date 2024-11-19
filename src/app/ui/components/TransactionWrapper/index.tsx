@@ -1,5 +1,5 @@
-import { TransactionTypes } from '../../../core/constants/transactionTypes';
-import { Withdraw } from "../Withdraw";
+import { TransactionTypes, TransactionTargets } from '../../../core/constants/transactionTypes';
+import { Transaction } from "../Withdraw";
 import { useTransactions } from '../../../core/hooks/useTransaction';
 
 
@@ -10,18 +10,20 @@ interface Props {
 
 export const TransactionWrapper = ({ transactionType }: Props) => {
 
-  const { state, retiroCajeroATM, depositarCajeroATM, depositarAgencia } = useTransactions()
+  const { state, retiroCajeroATM, depositarCajeroATM, depositarAgencia, transferencias  } = useTransactions()
   console.log({ transactionType })
   return (
     <>
       {(() => {
-        switch (transactionType.toLowerCase()) {
+        switch (transactionType) {
           case TransactionTypes.WITHDRAW:
-            return <Withdraw typeTransactionATM='retiro ATM' state={state} transactionHook={retiroCajeroATM} esRetiro={true} />;
+            return <Transaction titleTransaction='retiro ATM' state={state} transactionHook={retiroCajeroATM} transactionTarget={TransactionTargets.RETIRO} />;
           case TransactionTypes.DEPOSIT:
-            return <Withdraw typeTransactionATM='deposito ATM' state={state} transactionHook={depositarCajeroATM} esRetiro={false}/>;
+            return <Transaction titleTransaction='deposito ATM' state={state} transactionHook={depositarCajeroATM} transactionTarget={TransactionTargets.DEPOSITO} />;
           case TransactionTypes.DEPOSIT_ACCOUNT:
-            return <Withdraw typeTransactionATM='deposito Agencia' state={state} transactionHook={depositarAgencia} esRetiro={false} />;
+            return <Transaction titleTransaction='deposito Agencia' state={state} transactionHook={depositarAgencia} transactionTarget={TransactionTargets.DEPOSITO} />;
+          case TransactionTypes.TRANSFER:
+            return <Transaction titleTransaction='Tranferencia' state={state} transactionHook={transferencias}  transactionTarget={TransactionTargets.TRANSFERENCIA}/>  
           //   case 'depositar cajero':
           //     return <Deposit />;
           //   case 'deposito':

@@ -12,9 +12,12 @@ import { transactionMapper } from "../mappers/apiTo/transaction.mapper";
 export const doTransaction = async (transaction: string, body: IFormBodyTransaction): Promise<IResDataTransaction | IError> => {
     const url = urlResources.getTransaction(transaction)
 
+    console.log({transaction, body})
+    console.log(TransactionNames.DEPOSITATM, TransactionNames.DEPOSITACCOUNT)
     const bodyRequest = []
 
     if (transaction === TransactionNames.WITHDRAWATM) {
+        console.log("Ingreso a la condicion de retiro ATM")
         const bodyRe: IRequestBodyTransaction = {
             dinHeader: { ...headers },
             dinBody: {
@@ -26,11 +29,25 @@ export const doTransaction = async (transaction: string, body: IFormBodyTransact
     }
 
     if (transaction === TransactionNames.DEPOSITATM || TransactionNames.DEPOSITACCOUNT) {
+        console.log("Ingreso a la doble condicion")
         const bodyRe: IRequestBodyTransaction = {
             dinHeader: { ...headers },
             dinBody: {
                 accountNumberClient: body.accountNumber,
                 amount: body.amount
+            }
+        }
+        bodyRequest.push(bodyRe)
+    }
+
+    if(transaction === TransactionNames.DEPOSITTRANSFER) {
+        console.log("Ingreso a este punto")
+        const bodyRe: IRequestBodyTransaction = {
+            dinHeader: { ...headers },
+            dinBody: {
+                accountNumberSender: body.accountNumber,
+                accountNumberReceiver: body.accountNumberReceiver,
+                amount: body.amount,
             }
         }
         bodyRequest.push(bodyRe)
