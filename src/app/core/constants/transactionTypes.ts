@@ -7,10 +7,20 @@ export enum TransactionTypes {
     PURCHASE_STORE = 'purchase-store',
 }
 
+export const TransactionTypesTitle = {
+    'retiroATM' : "Retirar Cajero",
+    'depositoATM' : 'Depositar Cajero',
+    'deposit-account' : 'Depósito Agencia',
+    'transfer' : 'Transferencia',
+    'purchase-web' : 'Compra Web',
+    'purchase-store' : 'Compra Establecimiento'
+}
+
 export enum TransactionTargets {
     RETIRO = 'retirar',
     DEPOSITO = 'depositar',
     TRANSFERENCIA = 'transferir',
+    COMPRA = 'compra'
 }
 
 export enum TransactionNames {
@@ -18,4 +28,6 @@ export enum TransactionNames {
     DEPOSITATM = 'depositarCajero',
     DEPOSITACCOUNT = 'deposit',
     DEPOSITTRANSFER = 'depositTrasfer',
+    PURCHASEWEB = 'comprarWeb',
+    PURCHASELOCAL = 'comprarEstablecimiento'
 }

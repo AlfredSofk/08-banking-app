@@ -9,6 +9,7 @@ export const bankAccountActionTypes = {
     WITHDRAW: 'WITHDRAW',
     TRANSFER: 'TRANSFER',
     PURCHASE: 'PURCHASE',
+    PURCHASE_LOCAL : 'PURCHASE_LOCAL',
     GET_DATA_USER: 'GET_DATA_USER',
     LOADING: 'LOADING',
     ERROR: 'ERROR',
@@ -49,9 +50,23 @@ export const transfer = (payload: IResDataTransaction, impactAccount: string, de
 });
 
 
-export const purchase = () => ({
+export const purchase = (payload: IResDataTransaction, impactAccount: string) => ({
     type: bankAccountActionTypes.PURCHASE,
+    payload : {
+        ...payload,
+        impactAccount
+    }
 });
+
+export const purchaseLocal = (payload : IResDataTransaction, impactAccount : string) => ({
+    type : bankAccountActionTypes.PURCHASE_LOCAL,
+    payload : {
+        ...payload,
+        impactAccount
+    }
+
+
+})
 
 export const loadingBankAccount = (payload: boolean) => ({
     type: bankAccountActionTypes.LOADING,

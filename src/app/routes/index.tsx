@@ -8,7 +8,7 @@ import { TransactionWrapper } from "../ui/components/TransactionWrapper";
 import { TransactionTypes } from "../core/constants/transactionTypes";
 import DashboardContainer from "../container/DashboardContainer";
 
-export const router = createHashRouter([
+export const routerDef = [
     {
         path: "/home",
         element: (
@@ -43,6 +43,14 @@ export const router = createHashRouter([
                 element: <TransactionWrapper transactionType={TransactionTypes.TRANSFER} />,
             },
             {
+                path: TransactionTypes.PURCHASE_WEB,
+                element: <TransactionWrapper transactionType={TransactionTypes.PURCHASE_WEB} />,
+            },
+            {
+                path: TransactionTypes.PURCHASE_STORE,
+                element: <TransactionWrapper transactionType={TransactionTypes.PURCHASE_STORE} />,
+            },
+            {
                 path : "account",
                 element : <h1>Account</h1>
             },
@@ -61,4 +69,6 @@ export const router = createHashRouter([
         )
     },
     { path: "*", element: <h1>404</h1> },
-]);
+];
+
+export const hashRouter = createHashRouter(routerDef)

@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { AppContext } from "../state/appContext/AppContext"
-import { useNavigate } from "react-router-dom"
-import { deposit, depositAccount, errorTransaction, loadingBankAccount, transfer, withdraw } from "../state/bank-account/action"
+import { deposit, depositAccount, errorTransaction, loadingBankAccount, purchase, purchaseLocal, transfer, withdraw } from "../state/bank-account/action"
 import { doTransaction } from "../services/doTransaction"
 import { TransactionNames } from "../constants/transactionTypes"
 import { IFormBodyTransaction } from "../interfaces/requestToApi"
@@ -79,5 +78,44 @@ export const useTransactions = () => {
 
     }
 
-    return { state, dispatch, retiroCajeroATM, depositarCajeroATM, depositarAgencia, transferencias }
+    const compraWeb = (data: IFormBodyTransaction) => {
+
+        dispatch(loadingBankAccount(true))
+        const impactAccount: string = data.accountNumber
+        doTransaction(TransactionNames.PURCHASEWEB, data).then((response) => {
+
+            if ("message" in response) {
+                dispatch(errorTransaction(response.message))
+            }
+
+            dispatch(purchase(response as IResDataTransaction, impactAccount))
+            dispatch(loadingBankAccount(false))
+            alert('Compra web realizada exitosamente')
+        })
+    }
+
+    const compraEstablecimiento = (data : IFormBodyTransaction) =>{
+        dispatch(loadingBankAccount(true))
+        const impactAccount : string = data.accountNumber
+        doTransaction(TransactionNames.PURCHASELOCAL, data).then((response) => {
+            if("message" in response){
+                dispatch(errorTransaction(response.message))
+            }
+
+            dispatch(purchaseLocal(response as IResDataTransaction, impactAccount))
+            dispatch(loadingBankAccount(false))
+            alert('Compra Establecimiento realizada exitosamente')
+        })
+    }
+
+    return {    
+        state,
+        dispatch,
+        retiroCajeroATM,
+        depositarCajeroATM,
+        depositarAgencia,
+        transferencias,
+        compraWeb, 
+        compraEstablecimiento 
+    }
 }

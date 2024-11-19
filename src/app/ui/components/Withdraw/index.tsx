@@ -89,7 +89,7 @@ export const Transaction = ({ state,titleTransaction,  transactionTarget, transa
         }
 
         <div className="withdrawal__form-group">
-          <label htmlFor="amount" className="withdrawal__label">{`Monto a ${TransactionTargets.TRANSFERENCIA}`}</label>
+          <label htmlFor="amount" className="withdrawal__label">{`Monto a ${transactionTarget}`}</label>
           <input
             id="amount"
             type="number"
@@ -115,7 +115,7 @@ export const Transaction = ({ state,titleTransaction,  transactionTarget, transa
           
           { state.loading 
             ? <Loader />
-            :<button type="submit" className="withdrawal__submit">{transactionTarget ? 'Retirar' : 'Depositar'}</button>
+            :<button type="submit" className="withdrawal__submit">{`Monto a ${transactionTarget}`}</button>
           }
       </form>
     </section>

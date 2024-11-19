@@ -55,6 +55,7 @@ export interface IResDataTransaction {
     dinBody: IResTransaction;
     dinError: IDinError;
     impactAccount?: string;
+    destinyAccount?: string;
 }
 
 
