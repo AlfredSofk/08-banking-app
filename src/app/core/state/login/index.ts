@@ -27,9 +27,9 @@ export const loginCases = {
             loading: false,
         }
     },
-    [loginActionTypes.LOGOUT]: (state: IAuthState) => {
+    [loginActionTypes.LOGOUT]: () => {
         return {
-            ...state
+            ...initialAuthState
         }
     },
     [loginActionTypes.LOADING]: (state: IAuthState) => {

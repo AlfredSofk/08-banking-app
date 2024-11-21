@@ -1,12 +1,19 @@
 
 import { useState } from 'react';
 import './style.scss'
+import { useLoginToken } from '../../../core/hooks/useLoginToken';
 export const TopBar = () => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const {logoutUser} =useLoginToken()
 
     const toggleDropdown = () => {
       setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleLogout = () => {
+      console.log('logout')
+      logoutUser()
     };
   
     return (
@@ -25,7 +32,7 @@ export const TopBar = () => {
           </div>
           {isDropdownOpen && (
             <div className="topbar__dropdown" role="menu">
-              <button className="topbar__dropdown-item" role="menuitem">
+              <button className="topbar__dropdown-item" role="menuitem" onClick={handleLogout}>
                 Logout
               </button>
             </div>

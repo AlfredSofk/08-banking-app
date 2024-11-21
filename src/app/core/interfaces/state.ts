@@ -29,5 +29,5 @@ export interface IStateAuthContext extends IAuthState { }
 export interface IActionAuth {
     type: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload: any;
+    payload?: any;
 }

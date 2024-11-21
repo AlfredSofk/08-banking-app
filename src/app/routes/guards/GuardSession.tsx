@@ -1,6 +1,7 @@
-import { ReactNode, useContext } from "react";
+import { ReactNode, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../../core/state/authContext/AuthContext";
+import { validateToken } from "../../core/utils/token";
+import { useLoginToken } from "../../core/hooks/useLoginToken";
 
 
 interface IGuardProps {
@@ -10,19 +11,36 @@ interface IGuardProps {
 
 export const SessionGuard = ({ children }: IGuardProps) => {
 
-    // const { state } = useContext(AuthContext);
+    const {state, logoutUser} = useLoginToken()
+    const token = sessionStorage.getItem('token')
+    
+    console.log({token, state})
 
-    const { currentUser } = { currentUser: true }
+    useEffect(() => {
+        const token = sessionStorage.getItem('token')
+        if(token){
+            const isValid = validateToken(token)
+            if(!isValid)logoutUser()
+            
+        }
+    },[])
 
-    //   state.isAuthenticated
+    useEffect(() => {
+        
+        if(token){
+            const isValid = validateToken(token)
+            if(!isValid)logoutUser()
+            
+        }
+    },[token,state.isAuthenticated])
 
-    // if (!state.isAuthenticated) {
-    //     return <Navigate to="/" replace />
+    
 
-    // }
-
-    if (!currentUser) {
+    if (!token) {
         return <Navigate to="/" replace />
+
     }
+
+
     return children;
 };
