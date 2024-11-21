@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`test para el componente TopBar > match snapshot 1`] = `
+<DocumentFragment>
+  <header
+    aria-label="Barra superior"
+    class="topbar"
+  >
+    <div
+      class="topbar__content"
+    >
+      <h1
+        class="topbar__title"
+      >
+        Panel Bancario
+      </h1>
+      <div
+        class="topbar__user"
+      >
+        <img
+          alt="Icono de usuario"
+          aria-hidden="true"
+          class="topbar__user-icon"
+          src="https://via.placeholder.com/40"
+        />
+        <span
+          class="topbar__user-name"
+        >
+          Usuario
+        </span>
+        <span
+          aria-hidden="true"
+          class="topbar__dropdown-icon"
+        >
+          ▼
+        </span>
+      </div>
+    </div>
+  </header>
+</DocumentFragment>
+`;
