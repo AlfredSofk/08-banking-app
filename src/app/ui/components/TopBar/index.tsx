@@ -12,7 +12,7 @@ export const TopBar = () => {
     };
 
     const handleLogout = () => {
-      console.log('logout')
+      console.log('logout pepe nepe')
       logoutUser()
     };
   

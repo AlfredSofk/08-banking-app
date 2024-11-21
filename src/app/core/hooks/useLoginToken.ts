@@ -41,8 +41,6 @@ export const useLoginToken = () => {
     navigate('/')
   }
 
-
-
   return { state, loginUser, logoutUser }
 }
 
