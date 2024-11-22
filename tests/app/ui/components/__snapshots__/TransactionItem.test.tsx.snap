@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`test para el componente TransactionItem > match snapshot 1`] = `
+<DocumentFragment>
+  <li
+    class="sidebar__submenu-item"
+  >
+    <button
+      class="sidebar__submenu-button"
+    />
+  </li>
+</DocumentFragment>
+`;

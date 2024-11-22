@@ -22,6 +22,7 @@ exports[`test para el componente Dashboard > match snapshot 1`] = `
         Balance General
       </h3>
       <svg
+        aria-hidden="true"
         fill="currentColor"
         height="1em"
         stroke="currentColor"
