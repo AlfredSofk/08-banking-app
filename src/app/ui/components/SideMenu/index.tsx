@@ -25,7 +25,7 @@ export const SideMenu = () => {
   };
 
   return (
-    <aside className={`sidebar ${isExpanded ? 'sidebar--expanded' : ''}`} aria-label="Barra lateral de navegación">
+    <aside className={`sidebar ${isExpanded ? 'sidebar--expanded' : ''}`} role='navigation' aria-label="Barra lateral de navegación">
       <button className="sidebar__toggle" onClick={handleToggleSidebar} aria-label="Expandir menú">
         <FaBars />
       </button>
@@ -49,6 +49,7 @@ export const SideMenu = () => {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             aria-haspopup="true"
             aria-expanded={isDropdownOpen}
+            data-testid="botonDropdown"
           >
             <FaUser />
             {isExpanded && <span className="sidebar__text">Transacciones</span>}
@@ -56,8 +57,7 @@ export const SideMenu = () => {
           </button>
           { isDropdownOpen && 
             isExpanded &&
-
-            <ul className="sidebar__submenu">
+            <ul className="sidebar__submenu" data-testid="submenu">
               {
                 trasactionPaths?.map((route, index) => {
                   return (
@@ -66,46 +66,9 @@ export const SideMenu = () => {
                 })       
               }
             </ul>
-         
-              
           }
       
         </li>
-
-       {/* {
-        <ul className="sidebar__submenu">
-          <li className="sidebar__submenu-item">
-            <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.WITHDRAW)}>
-              Retirar Cajero
-            </button>
-          </li>
-          <li className="sidebar__submenu-item">
-            <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.DEPOSIT)}>
-              Depositar Cajero
-            </button>
-          </li>
-          <li className="sidebar__submenu-item">
-            <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.DEPOSIT_ACCOUNT)}>
-              Depósito
-            </button>
-          </li>
-          <li className="sidebar__submenu-item">
-            <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.TRANSFER)}>
-              Transferencias
-            </button>
-          </li>
-          <li className="sidebar__submenu-item">
-            <button className="sidebar__submenu-button" onClick={() => handleNavigate(TransactionTypes.PURCHASE_WEB)}>
-              Compra Web
-            </button>
-          </li>
-          <li className="sidebar__submenu-item">
-            <button className="sidebar__submenu-button" onClick={() => handleNavigate('/home/purchase-store')}>
-              Compra Establecimiento
-            </button>
-          </li>
-       </ul> 
-       } */}
         <li className="sidebar__item">
           <button
             className="sidebar__button"

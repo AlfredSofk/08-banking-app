@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`test para el componente AccountCard > match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="account-card"
+  >
+    <p
+      class="account-card__number"
+      data-testid="accountNumber"
+    >
+      Número de Cuenta: 123456789
+    </p>
+    <p
+      class="account-card__balance"
+      data-testid="balance"
+    >
+      Saldo: $1000.00
+    </p>
+  </div>
+</DocumentFragment>
+`;

@@ -24,6 +24,7 @@ exports[`test para el componente TopBar > match snapshot 1`] = `
           src="https://via.placeholder.com/40"
         />
         <span
+          aria-hidden="false"
           class="topbar__user-name"
         >
           Usuario

@@ -27,7 +27,7 @@ export const TopBar = () => {
               className="topbar__user-icon"
               aria-hidden="true"
             />
-            <span className="topbar__user-name">Usuario</span>
+            <span className="topbar__user-name" aria-hidden="false">Usuario</span>
             <span className="topbar__dropdown-icon" aria-hidden="true">▼</span>
           </div>
           {isDropdownOpen && (

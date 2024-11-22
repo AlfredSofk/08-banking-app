@@ -4,7 +4,7 @@ import { TopBar } from "../../../../src/app/ui/components/TopBar";
 import { MemoryRouter } from "react-router-dom";
 import React from "react";
 import {vi} from "vitest";
-import { useLoginToken } from "../../../../src/app/core/hooks/useLoginToken";
+// import { useLoginToken } from "../../../../src/app/core/hooks/useLoginToken";
 
 vi.mock("../../../../src/app/core/hooks/useLoginToken", () => ({
     useLoginToken: vi.fn(() => ({
@@ -14,6 +14,11 @@ vi.mock("../../../../src/app/core/hooks/useLoginToken", () => ({
     })),
 }));
 
+// vi.mock("../../../../src/app/core/hooks/useLoginToken"  , () => ({
+
+//     useLoginToken : vi.fn(),
+
+// }));
 
 describe('test para el componente TopBar', () => {
 
@@ -48,29 +53,60 @@ describe('test para el componente TopBar', () => {
         await fireEvent.click(userButton);
         expect(screen.queryByRole('menu')).not.toBeInTheDocument();
     });
-
-
     
     test('llama a logoutUser al hacer clic en el botón de Logout', async () => {
         
+        const {useLoginToken} = await import ('../../../../src/app/core/hooks/useLoginToken');
+        const logoutUserMock = vi.fn();
+
+        (useLoginToken as unknown as ReturnType<typeof vi.fn>).mockReturnValue({
+            logoutUser: logoutUserMock,
+        });
+
         render(<MemoryRouter><TopBar /></MemoryRouter>);
 
-        // Abrir el menú
+
         const userButton = screen.getByText(/usuario/i);
         fireEvent.click(screen.getByText(/usuario/i));
 
-        // Verificar que el botón de Logout está presente
+
         const logoutButton = screen.getByRole('menuitem', { name: /logout/i }) as HTMLButtonElement;
         expect(logoutButton).toBeInTheDocument();
 
-        // // Hacer clic en el botón de Logout
-        await fireEvent.click(logoutButton);
+ 
+         fireEvent.click(logoutButton);
 
-        console.log(logoutButton)
 
-        expect(useLoginToken().logoutUser).toHaveBeenCalled();
+
+        expect(logoutUserMock).toHaveBeenCalled();
 
         
+    });
+
+    test('verifica que el componente cumple con la accesibilidad', () => {
+        render(<TopBar />);
+        const header = screen.getByRole('banner', { name: /barra superior/i });
+        expect(header).toBeInTheDocument();
+    
+        const userButton = screen.getByText(/usuario/i);
+        expect(userButton).toHaveAttribute('aria-hidden', 'false');
+    });
+
+    test('el menú cambia de estado correctamente', async () => {
+        render(<TopBar />);
+    
+        const userButton = screen.getByText(/usuario/i);
+    
+        // Verificar estado inicial (cerrado)
+        expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    
+        // Simular clic para abrir
+        await fireEvent.click(userButton);
+        expect(screen.getByRole('menu')).toBeInTheDocument();
+    
+        // Simular clic para cerrar
+        await fireEvent.click(userButton);
+        expect(screen.queryByRole('menu')).not.toBeInTheDocument();
     });
 
 });
