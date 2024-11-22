@@ -14,9 +14,10 @@ export const Dashboard = ({state} : Props) => {
 
     return (
         <section className="accounts-overview" aria-labelledby="overview-heading">
-        <h2 id="overview-heading" className="accounts-overview__title">Resumen de Cuentas</h2>
+        <h2 id="overview-heading" className="accounts-overview__title" role="heading">Resumen de Cuentas</h2>
         <GeneralBalance balance={saldoGlobal} />
         <div className="accounts-overview__accounts">
+          {userAccounts.length === 0 && <p>No hay cuentas disponibles</p>}
           {userAccounts.map((account, index) => (
             <AccountCard
               key={index}

@@ -33,7 +33,7 @@ describe('test para el componente AccountCard', () => {
         // Verificar que el número de cuenta aparece correctamente
         expect(screen.getByTestId('accountNumber')).toBeInTheDocument();
         expect(screen.getByTestId('balance')).toBeInTheDocument();
-
+        
         const accountNumber = screen.getByTestId('accountNumber');
         expect(accountNumber.textContent).toContain('Número de Cuenta: 1234567890');
 
