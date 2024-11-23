@@ -36,62 +36,59 @@ export default function LoginForm({ state, loginUser }: Props) {
     }
 
     return (
-        <>
-            <div className="login">
-                <section className='login__container' aria-labelledby="login-heading">
-                    <h1 id="login-heading" className='login__title'>Iniciar Sesión</h1>
+        <div className="login">
+            <section className='login__container' aria-labelledby="login-heading">
+                <h1 id="login-heading" className='login__title'>Iniciar Sesión</h1>
 
-                    <form className='login-form' aria-describedby="login-form-desc" onSubmit={handleSubmit(onSubmit)}>
-                        <p id="login-form-desc" className='login-form__desc'>
-                            Introduce tus credenciales para acceder a tu cuenta.
-                        </p>
-                        <div className='login-form__group'>
-                            <label htmlFor="usuario" className='login-form__label'>Usuario</label>
-                            <input
-                                type="usuario"
-                                id="usuario"
-                                className='login-form__input'
-                                placeholder="usuarioEjemplo"
-                                aria-required="true"
-                                aria-describedby="usuario-desc"
-                                aria-invalid={errors.usuario ? "true" : "false"}
-                                {...register("usuario", { required: true, pattern: /^[a-zA-Z0-9]+$/i })}
-                            />
-                            {errors.usuario && (<small className='login-form__error' role="alert">El campo usuario es requerido</small>)}
-                            <span id="usuario-desc" className="sr-only">Introduce un correo válido</span>
-                        </div>
-
-                        <div className='login-form__group'>
-                            <label htmlFor="password" className='login-form__label'>Contraseña</label>
-                            <input
-                                type="password"
-                                id="password"
-                                className='login-form__input'
-                                placeholder="••••••••"
-                                aria-required="true"
-                                aria-describedby="password-desc"
-                                aria-invalid={errors.password ? "true" : "false"}
-                                {...register("password", { required: true, minLength: 8 })}
-                            />
-                            {errors.password && <small className='login-form__error' role="alert">El campo password es requerido</small>}
-                            <span id="password-desc" className="sr-only">Introduce tu contraseña</span>
-                        </div>
-                        {
-                            state.loading
-                                ? <Loader />
-                                : <button type='submit' className='login-form__button' >Iniciar Sesión</button>
-                        }
-
-                    </form>
-
-                    <p className='login__register'>
-                        ¿No tienes una cuenta?
-                        {/* <button type="button" className='login__register-link' aria-label="Registrarse">Regístrate aquí</button> */}
+                <form className='login-form' aria-describedby="login-form-desc" onSubmit={handleSubmit(onSubmit)}>
+                    <p id="login-form-desc" className='login-form__desc'>
+                        Introduce tus credenciales para acceder a tu cuenta.
                     </p>
-                </section>
-            </div>
+                    <div className='login-form__group'>
+                        <label htmlFor="usuario" className='login-form__label'>Usuario</label>
+                        <input
+                            type="usuario"
+                            id="usuario"
+                            className='login-form__input'
+                            placeholder="usuarioEjemplo"
+                            aria-required="true"
+                            aria-describedby="usuario-desc"
+                            aria-invalid={errors.usuario ? "true" : "false"}
+                            {...register("usuario", { required: true, pattern: /^[a-zA-Z0-9]+$/i })}
+                        />
+                        {errors.usuario && (<small className='login-form__error' role="alert">El campo usuario es requerido</small>)}
+                        <span id="usuario-desc" className="sr-only">Introduce un correo válido</span>
+                    </div>
 
-        </>
+                    <div className='login-form__group'>
+                        <label htmlFor="password" className='login-form__label'>Contraseña</label>
+                        <input
+                            type="password"
+                            id="password"
+                            className='login-form__input'
+                            placeholder="••••••••"
+                            aria-required="true"
+                            aria-describedby="password-desc"
+                            aria-invalid={errors.password ? "true" : "false"}
+                            {...register("password", { required: true, minLength: 8 })}
+                        />
+                        {errors.password && <small className='login-form__error' role="alert">El campo password es requerido</small>}
+                        <span id="password-desc" className="sr-only">Introduce tu contraseña</span>
+                    </div>
+                    {
+                        state.loading
+                            ? <Loader />
+                            : <button type='submit' className='login-form__button' role='buttonLogin'>Iniciar Sesión</button>
+                    }
+
+                </form>
+
+                <p className='login__register'>
+                    ¿No tienes una cuenta?
+                    {/* <button type="button" className='login__register-link' aria-label="Registrarse">Regístrate aquí</button> */}
+                </p>
+            </section>
+        </div>
     )
 
 }

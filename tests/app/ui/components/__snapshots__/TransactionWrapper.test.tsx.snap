@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`test para el componente TransactionWrapper > match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    No se encontró el tipo de transacción
+  </div>
+</DocumentFragment>
+`;

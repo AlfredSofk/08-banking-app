@@ -37,7 +37,7 @@ export const Transaction = ({ state,titleTransaction,  transactionTarget, transa
 
   return (
     <section className="withdrawal" aria-labelledby="withdrawal-heading">
-      <h2 id="withdrawal-heading" className="withdrawal__title">{titleTransaction} </h2>
+      <h2 id="withdrawal-heading" className="withdrawal__title" data-testid="title-transaction">{titleTransaction} </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="withdrawal__form" noValidate>
 
         <div className="withdrawal__form-group">

@@ -2,7 +2,7 @@ import {
   TransactionTypes,
   TransactionTargets,
 } from "../../../core/constants/transactionTypes";
-import { Transaction } from "../Withdraw";
+import { Transaction } from "../Transaction";
 import { useTransactions } from "../../../core/hooks/useTransaction";
 
 interface Props {
@@ -20,7 +20,6 @@ export const TransactionWrapper = ({ transactionType }: Props) => {
     compraWeb,
     compraEstablecimiento,
   } = useTransactions();
-  console.log({ transactionType });
   return (
     <>
       {(() => {
@@ -55,7 +54,7 @@ export const TransactionWrapper = ({ transactionType }: Props) => {
           case TransactionTypes.TRANSFER:
             return (
               <Transaction
-                titleTransaction="Tranferencia"
+                titleTransaction="Transferencia"
                 state={state}
                 transactionHook={transferencias}
                 transactionTarget={TransactionTargets.TRANSFERENCIA}
