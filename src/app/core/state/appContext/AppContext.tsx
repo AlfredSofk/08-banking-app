@@ -1,5 +1,5 @@
-import { createContext, useReducer } from "react"
 import { IContextApp, IStateAppContext } from "../../interfaces/state";
+import { createContext, useReducer } from "react"
 import { initialState, reducer } from "./reducer";
 
 

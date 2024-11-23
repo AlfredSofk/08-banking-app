@@ -10,12 +10,15 @@ export const http = async (url: string, method: HTTP_METHODS, body?: any, token?
 
     }
 
-
     const cookieToken = getCookie('token')
 
-    if (cookieToken !== 'undefined') {
-        headersHttp['Authorization'] = `Bearer ${cookieToken}`
+    if(cookieToken){
+        headersHttp.Authorization = `Bearer ${cookieToken}`
     }
+
+
+    
+    console.log(headersHttp)
 
     try {
         const response = await fetch(url, {
@@ -25,7 +28,6 @@ export const http = async (url: string, method: HTTP_METHODS, body?: any, token?
             },
             body: JSON.stringify(body),
         });
-
         if (response.ok) {
             return response.json()
         }

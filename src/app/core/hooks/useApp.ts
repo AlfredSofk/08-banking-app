@@ -11,18 +11,17 @@ export const useApp = () => {
     const { state, dispatch } = useContext(AppContext)
 
     const getDataClient = (username: string) => {
-
-        dispatch(loadingBankAccount(true))
-        console.log("paso loading")
-        getClientData({ username }).then((response) => {
-            if ("message" in response) {
-                dispatch(errorGetDataAccount(response.message))
-            }
-            dispatch(getDataUser(response as IResGetDataClient))
-        })
-
+        if(username !== ""){
+            dispatch(loadingBankAccount(true))
+            getClientData({ username }).then((response) => {
+                if ("message" in response) {
+                    dispatch(errorGetDataAccount(response.message))
+                }
+                dispatch(getDataUser(response as IResGetDataClient))
+            })
+        }
     }
 
-    return { state, dispatch, getDataClient }
+    return { state, getDataClient }
 
 }

@@ -115,7 +115,7 @@ export const Transaction = ({ state,titleTransaction,  transactionTarget, transa
           
           { state.loading 
             ? <Loader />
-            :<button type="submit" className="withdrawal__submit">{`Monto a ${transactionTarget}`}</button>
+            :<button type="submit" className="withdrawal__submit" role='buttonTransaction'>{`Monto a ${transactionTarget}`}</button>
           }
       </form>
     </section>

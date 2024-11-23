@@ -18,19 +18,23 @@ export const useLoginToken = () => {
   const navigate = useNavigate()
 
   const loginUser = (data: IBodyLoginToken) => {
-    dispatch(loading(state))
-    getLoginToken(data).then((response) => {
 
-      if ("message" in response) {
-        dispatch(errorLogin(response.message))
-      }
+    if(data.username !== "" && data.password !== ""){
+      dispatch(loading(state))
+      getLoginToken(data).then((response) => {
+  
+        if ("message" in response) {
+          dispatch(errorLogin(response.message))
+        }
+  
+        sessionStorage.setItem('token', response.dinBody?.token)
+        setCookie('token', response.dinBody?.token)
+        setCookie('username', data.username)
+        dispatch(login(response as ILoginToken))
+        navigate('/home/inicio')
+      });
+    }
 
-      sessionStorage.setItem('token', response.dinBody?.token)
-      setCookie('token', response.dinBody?.token)
-      setCookie('username', data.username)
-      dispatch(login(response as ILoginToken))
-      navigate('/home/inicio')
-    });
   }
 
   const logoutUser = () => {

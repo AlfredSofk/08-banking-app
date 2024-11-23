@@ -1,0 +1,67 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Test para el componente Transaction > Match Snapshot 1`] = `
+<DocumentFragment>
+  <section
+    aria-labelledby="withdrawal-heading"
+    class="withdrawal"
+  >
+    <h2
+      class="withdrawal__title"
+      data-testid="title-transaction"
+      id="withdrawal-heading"
+    >
+      test 
+    </h2>
+    <form
+      class="withdrawal__form"
+      novalidate=""
+    >
+      <div
+        class="withdrawal__form-group"
+      >
+        <label
+          class="withdrawal__label"
+          for="accountNumber"
+        >
+          Número de Cuenta
+        </label>
+        <input
+          aria-describedby="accountNumber-error"
+          aria-invalid="false"
+          class="withdrawal__input"
+          id="accountNumber"
+          name="accountNumber"
+          type="text"
+        />
+      </div>
+      <div
+        class="withdrawal__form-group"
+      >
+        <label
+          class="withdrawal__label"
+          for="amount"
+        >
+          Monto a retirar
+        </label>
+        <input
+          aria-describedby="amount-error"
+          aria-invalid="false"
+          class="withdrawal__input"
+          id="amount"
+          name="amount"
+          step="1"
+          type="number"
+        />
+      </div>
+      <button
+        class="withdrawal__submit"
+        role="buttonTransaction"
+        type="submit"
+      >
+        Monto a retirar
+      </button>
+    </form>
+  </section>
+</DocumentFragment>
+`;
