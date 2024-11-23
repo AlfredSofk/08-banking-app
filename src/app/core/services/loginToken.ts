@@ -19,7 +19,6 @@ export const getLoginToken = async ({ username, password }: IBodyLoginToken): Pr
 
     try {
         const response = await http(url, HTTP_METHODS.POST, body)
-        console.log(response)
         return loginTokenMapper(response);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

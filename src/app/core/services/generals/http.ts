@@ -16,10 +16,6 @@ export const http = async (url: string, method: HTTP_METHODS, body?: any, token?
         headersHttp.Authorization = `Bearer ${cookieToken}`
     }
 
-
-    
-    console.log(headersHttp)
-
     try {
         const response = await fetch(url, {
             method,

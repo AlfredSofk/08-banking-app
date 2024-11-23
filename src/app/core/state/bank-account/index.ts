@@ -15,7 +15,18 @@ export const initialAppState: IAppState = {
 
 export const bankAccountCases = {
 
-    [bankAccountActionTypes.DEPOSIT]: (state: IAppState) => {
+    [bankAccountActionTypes.DEPOSIT]: (state: IAppState, payload: IResDataTransaction) => {
+
+        const {dinBody, impactAccount} = payload
+        const findedIndexAccount = state.userAccounts.findIndex(element => element.number === impactAccount)
+
+        const { amount } = state.userAccounts[findedIndexAccount]
+
+        state.userAccounts[findedIndexAccount].amount = amount + dinBody.amountTransaction
+
+        state.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
+            return acum + transaccion.amount
+        }, 0)
 
         return {
             ...state
@@ -33,6 +44,10 @@ export const bankAccountCases = {
 
         state.userAccounts[findedIndexAccount].amount = amount + dinBody.amountTransaction
 
+        state.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
+            return acum + transaccion.amount
+        }, 0)
+
         return {
             ...state
         }
@@ -45,20 +60,17 @@ export const bankAccountCases = {
         const { dinBody, impactAccount } = payload
 
         const findedIndexAccount = stateCopy.userAccounts.findIndex(element => element.number === impactAccount)
-        
-
         const amountAux = stateCopy.userAccounts[findedIndexAccount].amount
         const transactionFee = (dinBody.amountTransaction + dinBody.transactionCost)
 
         stateCopy.userAccounts[findedIndexAccount].amount = amountAux - transactionFee
         
-        state.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
+        stateCopy.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
             return acum + transaccion.amount
         }, 0)
 
         return {
             ...stateCopy,
-
         }
     },
 
@@ -80,7 +92,7 @@ export const bankAccountCases = {
         stateCopy.userAccounts[findedIndexDestinyAccount].amount = amountDestinyAux + dinBody.amountTransaction
 
 
-        state.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
+        stateCopy.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
             return acum + transaccion.amount
         }, 0)
 
@@ -103,7 +115,7 @@ export const bankAccountCases = {
 
         stateCopy.userAccounts[findedIndexAccount].amount = amountAux - transactionFee
         
-        state.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
+        stateCopy.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
             return acum + transaccion.amount
         }, 0)
 
@@ -125,7 +137,7 @@ export const bankAccountCases = {
 
         stateCopy.userAccounts[findedIndexAccount].amount = amountAux - transactionFee
         
-        state.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
+        stateCopy.saldoGlobal = state.userAccounts.reduce((acum, transaccion) => {
             return acum + transaccion.amount
         }, 0)
 

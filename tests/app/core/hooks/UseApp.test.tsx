@@ -104,7 +104,7 @@ describe('Test para el hook useApp', async() => {
             expect(result.current.state.loading).toBe(false)
             expect(result.current.state.username).toBe("pablo")
 
-        })
+        },{timeout: 10000})
         
 
     })

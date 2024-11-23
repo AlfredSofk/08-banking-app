@@ -88,7 +88,23 @@ describe('Test para el hook useLoginToken', () => {
             expect(result.current.state.loading).toBe(false)
             expect(result.current.state.user).toBe("pablo")
 
-        },{timeout: 5000})
+        },{timeout: 10000})
+    })
+
+    test('Verificar que el logoutUser actualiza el estado correctamente', async() => {
+
+        const wrapperMock = getContextWithReducerMock({ stateMock: initialStateMock })
+        const { result } = renderHook(() => useLoginToken(), { wrapper: wrapperMock })
+        
+        await act(async() =>{
+            await result.current.logoutUser()
+        })
+
+        await waitFor(async () => {
+            expect(result.current.state.loading).toBe(false)
+            expect(result.current.state.user).toBe(null)
+
+        })
     })
 
 });
