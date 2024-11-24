@@ -59,6 +59,7 @@ export const doTransaction = async (transaction: string, body: IFormBodyTransact
         bodyRequest.push(bodyRe)
     }
 
+
     console.log(bodyRequest[0]);
     const token = getCookie('token');
 

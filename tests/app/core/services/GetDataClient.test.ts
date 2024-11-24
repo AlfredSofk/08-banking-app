@@ -2,14 +2,12 @@ import { vi } from "vitest";
 import { headers } from "../../../../src/app/core/constants/headers";
 import { IRequestBodyGetDataClient } from "../../../../src/app/core/interfaces/requestToApi";
 import { http } from "../../../../src/app/core/services/generals/http";
-import { getCookie } from "../../../../src/app/core/utils/cookies";
 import { getDataUserMapper } from "../../../../src/app/core/mappers/apiTo/getDataUser.mapper";
 import { tokenTest } from "../../../../src/app/core/utils/token";
 import { urlResources } from "../../../../src/app/core/constants/urlResources";
 import { IResGetDataClient } from "../../../../src/app/core/interfaces/requestApiTo";
 import { getClientData } from "../../../../src/app/core/services/getDataClient";
-import { waitFor } from '@testing-library/react';
-import { act } from "react";
+
 
 
 vi.mock('../../../../src/app/core/services/generals/http');
