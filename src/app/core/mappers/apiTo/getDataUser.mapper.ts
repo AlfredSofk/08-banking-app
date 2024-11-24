@@ -1,3 +1,4 @@
+import { IResGetDataClient } from "../../interfaces/requestApiTo";
 
 
 export const getDataUserMapper = (getDataUser: any): IResGetDataClient => {

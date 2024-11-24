@@ -5,6 +5,7 @@ import { initialState, reducer } from "../../../../src/app/core/state/appContext
 import { AppContext } from "../../../../src/app/core/state/appContext/AppContext";
 import { vi } from "vitest";
 import { IAppState } from "../../../../src/app/core/interfaces/bankAccount";
+import { tokenTest } from "../../../../src/app/core/utils/token";
 
 vi.mock('../../../../src/app/environment/environment.ts', () => ({
     environment: {
@@ -69,7 +70,7 @@ describe('Test para el hook useTransaction', () => {
         const mockGetCookie = getCookie
         mockGetCookie.mockImplementation((name: string) => {
             if (name === 'token') {
-                return 'eyJpZGVudGlmaWNhdGlvbkRldmljZSI6IkFETUlOIiwiaWRlbnRpZmljYXRpb25OdW1iZXIiOiJwYWJsbyIsImlkZW50aWZpY2F0aW9uVHlwZSI6IkpXVCIsImFsZyI6IkhTNTEyIn0.eyJqdGkiOiJiYW5jb0FQSUpXVCIsInN1YiI6InBhYmxvIiwiYXV0aG9yaXRpZXMiOlsiV1JJVEUiLCJSRUFEIiwiQURNSU4iXSwiaWF0IjoxNzMyMzc2NDY3LCJleHAiOjE3MzI0NTQ0Njd9.YzH90xrPQTi8EoAbmaqaT6wtZTGdKiOQYfpLgH2zNkS8_q-W_yXz62X7XitbxlLyyOmzn3s1uSfGMdzIVdofSA';
+                return tokenTest;
             }
             return null;
         });
