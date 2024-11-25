@@ -1,0 +1,46 @@
+.error-message {
+    background-color: #ffe6e6;
+    color: #b71c1c;
+    border: 1px solid #f44336;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  
+    &__header {
+      margin-bottom: 12px;
+    }
+  
+    &__title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+      color: #b71c1c;
+    }
+  
+    &__body {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  
+    &__description {
+      margin: 0 0 10px;
+    }
+  
+    &__details {
+      background-color: #fff8f8;
+      border-left: 4px solid #f44336;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #d32f2f;
+  
+      summary {
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+    }
+  }
+  

@@ -7,6 +7,7 @@ import LoginContainer from "../container/LoginContainer";
 import { TransactionWrapper } from "../ui/components/TransactionWrapper";
 import { TransactionTypes } from "../core/constants/transactionTypes";
 import DashboardContainer from "../container/DashboardContainer";
+import { ErrorScreen } from "../ui/components/Error";
 
 export const routerDef = [
     {
@@ -20,6 +21,7 @@ export const routerDef = [
                 </SessionGuard>
             </AuthProvider>
         ),
+        errorElement  : <ErrorScreen errorDetails="Error al momento de realizar la petición" />,
         children: [
             {
                 path: "inicio",

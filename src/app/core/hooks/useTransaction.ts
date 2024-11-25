@@ -24,6 +24,7 @@ export const useTransactions = () => {
                 console.log(impactAccount)
                 if ("message" in response) {
                     dispatch(errorTransaction(response.message))
+                    return
                 }
     
                 dispatch(withdraw(response as IResDataTransaction, impactAccount))
@@ -40,6 +41,7 @@ export const useTransactions = () => {
             doTransaction(TransactionNames.DEPOSITATM, data).then((response) => {
                 if ("message" in response) {
                     dispatch(errorTransaction(response.message))
+                    return
                 }
     
                 dispatch(deposit(response as IResDataTransaction, impactAccount))
@@ -57,6 +59,7 @@ export const useTransactions = () => {
             doTransaction(TransactionNames.DEPOSITACCOUNT, data).then((response) => {
                 if ("message" in response) {
                     dispatch(errorTransaction(response.message))
+                    return
                 }
                 dispatch(depositAccount(response as IResDataTransaction, impactAccount))
                 dispatch(loadingBankAccount(false))
@@ -75,6 +78,7 @@ export const useTransactions = () => {
             doTransaction(TransactionNames.DEPOSITTRANSFER, data).then((response) => {
                 if ("message" in response) {
                     dispatch(errorTransaction(response.message))
+                    return
                 }
     
                 dispatch(transfer(response as IResDataTransaction, impactAccount, destinyAccount))
@@ -92,6 +96,7 @@ export const useTransactions = () => {
     
                 if ("message" in response) {
                     dispatch(errorTransaction(response.message))
+                    return
                 }
     
                 dispatch(purchase(response as IResDataTransaction, impactAccount))
@@ -108,6 +113,7 @@ export const useTransactions = () => {
             doTransaction(TransactionNames.PURCHASELOCAL, data).then((response) => {
                 if("message" in response){
                     dispatch(errorTransaction(response.message))
+                    return
                 }
     
                 dispatch(purchaseLocal(response as IResDataTransaction, impactAccount))

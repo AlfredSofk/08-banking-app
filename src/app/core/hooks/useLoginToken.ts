@@ -25,6 +25,7 @@ export const useLoginToken = () => {
   
         if ("message" in response) {
           dispatch(errorLogin(response.message))
+          return
         }
   
         sessionStorage.setItem('token', response.dinBody?.token)
