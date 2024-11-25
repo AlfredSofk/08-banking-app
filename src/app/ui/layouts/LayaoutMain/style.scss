@@ -10,7 +10,9 @@
     }
 
     &__main {
-        padding: 2rem;
+        // padding: 2rem;
         background-color: #ffffff;
-        flex: 1;}     
+        flex: 1;
+        overflow: auto;
+    }     
 }
