@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 import { getLoginToken } from "../../../../src/app/core/services/loginToken";
 import { http } from "../../../../src/app/core/services/generals/http";
 import { loginTokenMapper } from "../../../../src/app/core/mappers/apiTo/loginToken.mapper";
@@ -19,11 +19,6 @@ describe('Pruebas para el servicio LoginToken', () => {
 
     const mockHttp = vi.mocked(http);
     const mockMapper = vi.mocked(loginTokenMapper);
-
-    const mockHeaders = {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer mockToken',
-    };
 
     const mockResponse = {
         dinHeader: {},
@@ -46,7 +41,7 @@ describe('Pruebas para el servicio LoginToken', () => {
         const mockUrl = urlResources.generateToken
 
         mockHttp.mockResolvedValue(mockResponse);
-        mockMapper.mockReturnValue(mockResponse);
+        (mockMapper as Mock).mockReturnValue(mockResponse);
 
         const result = await getLoginToken({ username: 'pablo', password: '123456' });
 

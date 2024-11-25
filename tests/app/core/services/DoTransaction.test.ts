@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 import { transactionMapper } from '../../../../src/app/core/mappers/apiTo/transaction.mapper';
 import { http } from "../../../../src/app/core/services/generals/http";
 import { tokenTest } from "../../../../src/app/core/utils/token";
@@ -6,7 +6,7 @@ import { getTestMockResponse, getTestMockBody } from '../../../../src/app/core/u
 import { urlResources } from "../../../../src/app/core/constants/urlResources";
 import { doTransaction } from '../../../../src/app/core/services/doTransaction';
 import { TransactionNames } from "../../../../src/app/core/constants/transactionTypes";
-import { IResDataTransaction } from "../../../../src/app/core/interfaces/requestApiTo";
+import { getCookie } from "../../../../src/app/core/utils/cookies";
 
 
 
@@ -27,15 +27,14 @@ vi.mock('../../../../src/app/environment/environment.ts', () => ({
 describe('Pruebas para el servicio DoTransaction', () => {        
     const mockHttp = vi.mocked(http);
     const mockMapper = vi.mocked(transactionMapper);
-    const mockGetCookie = vi.fn()
+    const mockGetCookie = getCookie as Mock
 
     const mockAccountNumber = 'eEUmMZUTw3xEtmhqo45O+A==';
     const mockAccountReciver = '6ig/kf+q1mUw6arpdWqfeA==';
 
     beforeEach(async () => {
         vi.clearAllMocks();
-        const {getCookie} = await import('../../../../src/app/core/utils/cookies');
-        const mockGetCookie = getCookie
+        // const {getCookie} = await import('../../../../src/app/core/utils/cookies');
         mockGetCookie.mockImplementation((name: string) => {
             if (name === 'token') {
                 return tokenTest;

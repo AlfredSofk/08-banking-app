@@ -170,7 +170,9 @@ export const bankAccountCases = {
         }
     },
     
-    [bankAccountActionTypes.ERROR]: (state: IAppState, payload: string) => {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [bankAccountActionTypes.ERROR]: (state: IAppState, payload?:  string | any) => {
         return { ...state, error: payload }
 
 

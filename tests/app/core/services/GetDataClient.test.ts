@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 import { headers } from "../../../../src/app/core/constants/headers";
 import { IRequestBodyGetDataClient } from "../../../../src/app/core/interfaces/requestToApi";
 import { http } from "../../../../src/app/core/services/generals/http";
@@ -7,6 +7,7 @@ import { tokenTest } from "../../../../src/app/core/utils/token";
 import { urlResources } from "../../../../src/app/core/constants/urlResources";
 import { IResGetDataClient } from "../../../../src/app/core/interfaces/requestApiTo";
 import { getClientData } from "../../../../src/app/core/services/getDataClient";
+import { getCookie } from "../../../../src/app/core/utils/cookies";
 
 
 
@@ -52,12 +53,11 @@ describe('Pruebas para el servicio GetDataClient', () => {
 
     const mockHttp = vi.mocked(http);
     const mockMapper = vi.mocked(getDataUserMapper);
-    const mockGetCookie = vi.fn()
+    const mockGetCookie = getCookie as Mock
 
     beforeEach(async () => {
         vi.clearAllMocks();
-        const {getCookie} = await import('../../../../src/app/core/utils/cookies');
-        const mockGetCookie = getCookie
+        // const {getCookie} = await import('../../../../src/app/core/utils/cookies');
         mockGetCookie.mockImplementation((name: string) => {
             if (name === 'token') {
                 return tokenTest;

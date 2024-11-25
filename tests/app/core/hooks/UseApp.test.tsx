@@ -1,10 +1,12 @@
 import {renderHook, waitFor} from '@testing-library/react';
-import { vi } from 'vitest';
+import { Mock, vi } from 'vitest';
 import React, { act, useReducer } from 'react';
 import { initialState, reducer } from '../../../../src/app/core/state/appContext/reducer';
 import { AppContext } from '../../../../src/app/core/state/appContext/AppContext';
 import { useApp } from '../../../../src/app/core/hooks/useApp';
 import { tokenTest } from '../../../../src/app/core/utils/token';
+import { getCookie } from '../../../../src/app/core/utils/cookies';
+import { IAppState } from '../../../../src/app/core/interfaces/bankAccount';
 
 
 vi.mock('../../../../src/app/core/utils/cookies', () => ({
@@ -28,6 +30,7 @@ const wrapperMock = ({ children }: { children: React.ReactNode }) => (
 
 )
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getContextMock({ stateMock, dispatch }: { stateMock: any, dispatch?: any }) {
 
 
@@ -39,7 +42,8 @@ function getContextMock({ stateMock, dispatch }: { stateMock: any, dispatch?: an
     );
 }
 
-function getContextWithReducerMock({ stateMock }: { stateMock: any}){
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getContextWithReducerMock({ stateMock }: { stateMock: IAppState}){
 
     return({children}) => {
         const [state, dispatch] = useReducer(reducer, stateMock);
@@ -54,12 +58,11 @@ function getContextWithReducerMock({ stateMock }: { stateMock: any}){
 
 
 describe('Test para el hook useApp', async() => {
+    const mockGetCookie = getCookie as Mock
 
     beforeEach(async () => {
         vi.clearAllMocks();
         // Mock de getCookie que devuelve un token específico
-        const {getCookie} = await import('../../../../src/app/core/utils/cookies');
-        const mockGetCookie = getCookie
         mockGetCookie.mockImplementation((name: string) => {
             if (name === 'token') {
                 return tokenTest;
