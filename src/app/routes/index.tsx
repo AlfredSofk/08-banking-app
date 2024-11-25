@@ -68,7 +68,8 @@ export const routerDef = [
             <AuthProvider>
                 <LoginContainer />
             </AuthProvider>
-        )
+        ),
+        errorElement  : <ErrorScreen errorDetails="Error al momento de realizar login" />,
     },
     { path: "*", element: <h1>404</h1> },
 ];
