@@ -8,8 +8,9 @@ import { TransactionWrapper } from "../ui/components/TransactionWrapper";
 import { TransactionTypes } from "../core/constants/transactionTypes";
 import DashboardContainer from "../container/DashboardContainer";
 import { ErrorScreen } from "../ui/components/Error";
+import { RouterDef } from "../core/interfaces/routerDef";
 
-export const routerDef = [
+export const routerDef : RouterDef = [
     {
         path: "/home",
         element: (

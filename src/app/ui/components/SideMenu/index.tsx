@@ -1,28 +1,52 @@
-import  { useState } from 'react';
+import  React, { memo, useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaCog, FaQuestion, FaBars, FaChevronDown } from 'react-icons/fa';
 import { CiBank } from 'react-icons/ci';
 import './style.scss';
-import { routerDef } from '../../../routes';
 import { TransactionItem } from '../TransactionItem';
+import { RouterDef } from '../../../core/interfaces/routerDef';
+import { useWhyDidYouUpdate } from '../../../core/hooks/whyDidYouGetUpdate';
 
-export const SideMenu = () => {
+
+interface SideMenuProps {
+  routerDef: RouterDef;
+}
+
+
+const MemoizedSideMenu = ({routerDef} : SideMenuProps) => {
+
+  console.log(routerDef)
+
   const [isExpanded, setIsExpanded] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const transactionContainer = routerDef[0].children
-  const trasactionPaths = transactionContainer?.slice(1, -2)
-
   const navigate = useNavigate();
 
-  const handleToggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
+  useWhyDidYouUpdate('SideMenu', {routerDef, isExpanded, isDropdownOpen});
 
-  const handleNavigate = (path: string) => {
-    let newPath = `/home/${path}`;
-    navigate(newPath);
-  };
+  const transactionPaths = useMemo(() => {
+    const transactionContainer = routerDef.find((route) => route.path === '/home')?.children || [];
+    return transactionContainer.filter(
+      (route) => !['inicio', 'account', 'about'].includes(route.path)
+    );
+  }, [routerDef]);
+
+
+  const handleToggleSidebar = useCallback(() => {
+    setIsExpanded((prev) => !prev);
+  }, []);
+
+  const handleNavigate = useCallback(
+    (path: string) => {
+      navigate(`/home/${path}`);
+    },
+    [navigate]
+  );
+
+  const toggleDropdown = useCallback(() => {
+    setIsDropdownOpen((prev) => !prev);
+  }, []);
+
 
   return (
     <aside className={`sidebar ${isExpanded ? 'sidebar--expanded' : ''}`} role='navigation' aria-label="Barra lateral de navegación">
@@ -46,7 +70,7 @@ export const SideMenu = () => {
         <li className="sidebar__item sidebar__item--dropdown">
           <button
             className="sidebar__button"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            onClick={() => toggleDropdown()}
             aria-haspopup="true"
             aria-expanded={isDropdownOpen}
             data-testid="botonDropdown"
@@ -59,7 +83,7 @@ export const SideMenu = () => {
             isExpanded &&
             <ul className="sidebar__submenu" data-testid="submenu">
               {
-                trasactionPaths?.map((route, index) => {
+                transactionPaths?.map((route, index) => {
                   return (
                     <TransactionItem key={index} path={route.path} handleNavigate={handleNavigate} />
                   )
@@ -94,3 +118,6 @@ export const SideMenu = () => {
     </aside>
   );
 };
+
+
+export const SideMenu = React.memo(MemoizedSideMenu)

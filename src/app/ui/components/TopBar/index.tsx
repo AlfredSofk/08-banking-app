@@ -1,21 +1,24 @@
 
-import { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './style.scss'
 import { useLoginToken } from '../../../core/hooks/useLoginToken';
-export const TopBar = () => {
+
+export const TopBar = React.memo(() => {        
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const {logoutUser} =useLoginToken()
 
-    const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
-    };
+    // Memoizar la función para evitar recreación
+    const toggleDropdown = useCallback(() => {
+      setIsDropdownOpen((prev) => !prev);
+    }, []);
 
-    const handleLogout = () => {
-      console.log('logout')
-      logoutUser()
-    };
-  
+    // Memoizar la función de logout
+    const handleLogout = useCallback(() => {
+      console.log('logout');
+      logoutUser();
+    }, [logoutUser]);
+    
     return (
       <header className="topbar" aria-label="Barra superior">
         <div className="topbar__content">
@@ -42,4 +45,4 @@ export const TopBar = () => {
     );
 
 
-}
+})
